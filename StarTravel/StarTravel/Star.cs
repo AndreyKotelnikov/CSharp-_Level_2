@@ -9,20 +9,20 @@ namespace StarTravel
 {
     class Star:BaseObject
     {
-        public Star(Point pos, Point dir, Size size, string number) : base(pos, dir, size, number)
+        public Star(Point pos, Point dir, Size size, int closely, Size? maxSize, string number) : base(pos, dir, size, closely, maxSize, number)
         {
         }
 
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawLine(Pens.White, Pos.X, Pos.Y, Pos.X + Size.Width, Pos.Y + Size.Height);
-            Game.Buffer.Graphics.DrawLine(Pens.White, Pos.X + Size.Width, Pos.Y, Pos.X, Pos.Y + Size.Height);
+            Game.Buffer.Graphics.DrawLine(Pens.White, pos.X, pos.Y, pos.X + size.Width, pos.Y + size.Height);
+            Game.Buffer.Graphics.DrawLine(Pens.White, pos.X + size.Width, pos.Y, pos.X, pos.Y + size.Height);
         }
 
         public override void Update()
         {
-            Pos.X = Pos.X - Dir.X;
-            if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
+            pos.X = pos.X - dir.X;
+            if (pos.X < 0) pos.X = Game.Width + size.Width;
         }
 
     }

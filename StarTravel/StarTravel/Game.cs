@@ -16,15 +16,22 @@ namespace StarTravel
         // Ширина и высота игрового поля
         public static int Width { get; set; }
         public static int Height { get; set; }
-        public static BaseObject[] _objs;
+        public static Point startPoint;
+        public static BaseObject[] baseObjs;
 
         public static void Load()
         {
-            _objs = new BaseObject[28];
-            for (int i = 0; i < _objs.Length; i++)
-                _objs[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20), i.ToString());
-            for (int i = _objs.Length / 2; i < _objs.Length; i++)
-                _objs[i] = new Star(new Point(600, (i - (_objs.Length / 2)) * 20), new Point(i, 0), new Size(20, 20), i.ToString());
+            baseObjs = new BaseObject[1];
+            Random rand = new Random();
+            for (int i = 0; i < baseObjs.Length; i++)
+            {
+                //baseObjs[i] = new BaseObject(startPoint, new Point(rand.Next(-1, 1), rand.Next(-1, 1)), new Size(1, 1), rand.Next(11));
+                baseObjs[i] = new BaseObject(startPoint, new Point(-10, 10), new Size(1, 1), 10);
+            }
+            //for (int i = 0; i < _objs.Length; i++)
+            //    _objs[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20), i.ToString());
+            //for (int i = _objs.Length / 2; i < _objs.Length; i++)
+            //    _objs[i] = new Star(new Point(600, (i - (_objs.Length / 2)) * 20), new Point(i, 0), new Size(20, 20), i.ToString());
 
         }
 
@@ -42,6 +49,7 @@ namespace StarTravel
             // Запоминаем размеры формы
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
+            startPoint = new Point(Width / 2, Height / 2);
             // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
             Load();
@@ -60,14 +68,14 @@ namespace StarTravel
             //Buffer.Render();
 
             Buffer.Graphics.Clear(Color.Black);
-            foreach (BaseObject obj in _objs)
+            foreach (BaseObject obj in baseObjs)
                 obj.Draw();
             Buffer.Render();
         }
 
         public static void Update()
         {
-            foreach (BaseObject obj in _objs)
+            foreach (BaseObject obj in baseObjs)
                 obj.Update();
         }
 
