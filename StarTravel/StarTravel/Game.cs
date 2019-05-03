@@ -18,15 +18,51 @@ namespace StarTravel
         public static int Height { get; set; }
         public static Point startPoint;
         public static BaseObject[] baseObjs;
+        public static Image[] imageList;
 
         public static void Load()
         {
-            baseObjs = new BaseObject[1];
+            baseObjs = new BaseObject[20];
             Random rand = new Random();
+            int x = 1;
+            int y = 1;
+            int maxNumber = 10;
             for (int i = 0; i < baseObjs.Length; i++)
             {
-                //baseObjs[i] = new BaseObject(startPoint, new Point(rand.Next(-1, 1), rand.Next(-1, 1)), new Size(1, 1), rand.Next(11));
-                baseObjs[i] = new BaseObject(startPoint, new Point(-10, 10), new Size(1, 1), 10);
+                switch (i % 4)
+                {
+                    case 0:
+                        x = -rand.Next(1, maxNumber);
+                        y = -rand.Next(1, maxNumber);
+                        break;
+                    case 1:
+                        x = rand.Next(1, maxNumber);
+                        y = -rand.Next(1, maxNumber);
+                        break;
+                    case 2:
+                        x = -rand.Next(1, maxNumber);
+                        y = rand.Next(1, maxNumber);
+                        break;
+                    case 3:
+                        x = rand.Next(1, maxNumber);
+                        y = rand.Next(1, maxNumber);
+                        break;
+                    default:
+                        break;
+                }
+                if (Math.Abs(x) <= Math.Abs(y)) { x = x / Math.Abs(x); }
+                else { y = y / Math.Abs(y); }
+                if (i < imageList.Length)
+                {
+                    baseObjs[i] = new Star(startPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
+                }
+                else
+                {
+                    baseObjs[i] = new BaseObject(startPoint, new Point(x, y), new Size(1, 1), rand.Next(11), rand.Next(10) * 10);
+                }
+                
+
+                //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
             }
             //for (int i = 0; i < _objs.Length; i++)
             //    _objs[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20), i.ToString());
@@ -52,9 +88,14 @@ namespace StarTravel
             startPoint = new Point(Width / 2, Height / 2);
             // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
+
+            imageList = new Image[3];
+            imageList[0] = Image.FromFile(@"..\..\Звезда1.png");
+            imageList[1] = Image.FromFile(@"..\..\Звезда2.png");
+            imageList[2] = Image.FromFile(@"..\..\Звезда3.png");
             Load();
 
-            Timer timer = new Timer { Interval = 50 };
+            Timer timer = new Timer { Interval = 10 };
             timer.Start();
             timer.Tick += Timer_Tick;
         }
