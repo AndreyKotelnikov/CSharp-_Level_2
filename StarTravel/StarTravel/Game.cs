@@ -23,7 +23,7 @@ namespace StarTravel
 
         public static void Load()
         {
-            baseObjs = new BaseObject[20];
+            baseObjs = new BaseObject[30];
             Random rand = new Random();
             int x = 1;
             int y = 1;

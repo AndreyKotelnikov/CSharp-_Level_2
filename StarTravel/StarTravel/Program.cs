@@ -11,9 +11,11 @@ namespace StarTravel
     {
         static void Main(string[] args)
         {
-            Form form = new Form();
-            form.Width = 1000;
-            form.Height = 600;
+            Form form = new Form()
+            {
+                Width = 1000,
+                Height = 600
+            };
             Game.Init(form);
             form.Show();
             Game.Draw();
