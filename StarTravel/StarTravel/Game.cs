@@ -23,7 +23,7 @@ namespace StarTravel
 
         public static void Load()
         {
-            baseObjs = new BaseObject[30];
+            baseObjs = new BaseObject[4];
             Random rand = new Random();
             int x = 1;
             int y = 1;
@@ -56,6 +56,11 @@ namespace StarTravel
                 if (i <= 2)
                 {
                     baseObjs[i] = new Star(startPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
+                }
+                else if (i == 3)
+                {
+                    baseObjs[i] = new Asteroid(new Point(10, 10), new Point(1, 1), new Size(1, 1), rand.Next(-1, 3),
+                        0, imageList[rand.Next(7, 11)], new Point(10, 10), new Size(40, 40));
                 }
                 else
                 {
@@ -90,7 +95,7 @@ namespace StarTravel
             // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
-            imageList = new Image[7];
+            imageList = new Image[11];
             imageList[0] = Image.FromFile(@"..\..\Звезда1.png");
             imageList[1] = Image.FromFile(@"..\..\Звезда2.png");
             imageList[2] = Image.FromFile(@"..\..\Звезда3.png");
@@ -98,11 +103,15 @@ namespace StarTravel
             imageList[4] = Image.FromFile(@"..\..\Звезда_м2.png");
             imageList[5] = Image.FromFile(@"..\..\Звезда_м3.png");
             imageList[6] = Image.FromFile(@"..\..\Звезда_м4.png");
+            imageList[7] = Image.FromFile(@"..\..\Астероид1.png");
+            imageList[8] = Image.FromFile(@"..\..\Астероид2.png");
+            imageList[9] = Image.FromFile(@"..\..\Астероид3.png");
+            imageList[10] = Image.FromFile(@"..\..\Астероид4.png");
             backGround = Image.FromFile(@"..\..\Звёздное небо.png");
             
             Load();
 
-            Timer timer = new Timer { Interval = 10 };
+            Timer timer = new Timer { Interval = 100 };
             timer.Start();
             timer.Tick += Timer_Tick;
         }
@@ -125,7 +134,14 @@ namespace StarTravel
         public static void Update()
         {
             foreach (BaseObject obj in baseObjs)
+            {
                 obj.Update();
+                if (obj is Asteroid)
+                {
+                    if (obj.Collision(Bullet.BulletsList)) { System.Media.SystemSounds.Hand.Play(); }
+                }
+            }
+                
         }
 
         private static void Timer_Tick(object sender, EventArgs e)
