@@ -23,7 +23,7 @@ namespace StarTravel
 
         public static void Load()
         {
-            baseObjs = new BaseObject[4];
+            baseObjs = new BaseObject[30];
             Random rand = new Random();
             int x = 1;
             int y = 1;
@@ -59,8 +59,8 @@ namespace StarTravel
                 }
                 else if (i == 3)
                 {
-                    baseObjs[i] = new Asteroid(new Point(10, 10), new Point(1, 1), new Size(1, 1), rand.Next(-1, 3),
-                        0, imageList[rand.Next(7, 11)], new Point(10, 10), new Size(40, 40));
+                    baseObjs[i] = new Asteroid(new Point(900, 500), new Point(-1, -1), new Size(1, 1), 2,
+                        0, imageList[rand.Next(7, 11)], new Point(900, 500), new Size(40, 40));
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace StarTravel
             
             Load();
 
-            Timer timer = new Timer { Interval = 100 };
+            Timer timer = new Timer { Interval = 30 };
             timer.Start();
             timer.Tick += Timer_Tick;
         }

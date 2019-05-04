@@ -10,7 +10,7 @@ namespace StarTravel
     class Asteroid : BaseObject
     {
         internal static List<Asteroid> AsteroidsList { get; set; }
-        internal Point StartPoint { get; private set; }
+        internal Point StartPoint { get; set; }
 
         static Asteroid()
         {
@@ -35,9 +35,9 @@ namespace StarTravel
         {
             base.Draw();
             Game.Buffer.Graphics.DrawImage(image, pos.X, pos.Y, size.Width, size.Height);
-            Font font = new Font("Verdana", (int)(size.Width * 0.9) >= 1 ? (int)(size.Width * 0.9) : 1);
-            SolidBrush myBrush = new SolidBrush(Color.White);
-            Game.Buffer.Graphics.DrawString(text, font, myBrush, pos.X + 1, pos.Y + 1);
+            //Font font = new Font("Verdana", (int)(size.Width * 0.9) >= 1 ? (int)(size.Width * 0.9) : 1);
+            //SolidBrush myBrush = new SolidBrush(Color.White);
+            //Game.Buffer.Graphics.DrawString(text, font, myBrush, pos.X + 1, pos.Y + 1);
         }
     }
 }

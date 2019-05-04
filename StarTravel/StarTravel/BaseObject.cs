@@ -10,12 +10,12 @@ namespace StarTravel
     abstract class BaseObject: ICollision
     {
         internal Point pos { get; set; }
-        internal Point dir { get; }
+        internal Point dir { get; set; }
         internal Size size { get; set; }
-        internal Size maxSize { get; }
-        internal int closely { get; } //0 - очень близко, 10 - очень далеко
+        internal Size maxSize { get; set; }
+        internal int closely { get; set; } //1 - очень близко, 10 - очень далеко, 0 - летит прямо на тебя.
         protected Image image;
-        internal int delay;
+        internal int delay { get; set; }
         internal string text { get; set; }
 
         public BaseObject(Point pos, Point dir, Size size, int closely, Image image = null, int delay = 0, Size? maxSize = null, string text = "")
