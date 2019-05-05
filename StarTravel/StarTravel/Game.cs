@@ -19,7 +19,12 @@ namespace StarTravel
         public static Point startPoint;
         public static BaseObject[] baseObjs;
         public static Image[] imageList;
+        public static Image[] imageBoomList;
         public static Image backGround;
+        public static Image ship;
+        public static Form form;
+        private static int killAsteroids;
+
 
         public static void Load()
         {
@@ -28,7 +33,7 @@ namespace StarTravel
             int x = 1;
             int y = 1;
             int maxNumber = 10;
-            for (int i = 0; i < baseObjs.Length; i++)
+            for (int i = 0; i < baseObjs.Length - 1; i++)
             {
                 switch (i % 4)
                 {
@@ -57,16 +62,21 @@ namespace StarTravel
                 {
                     baseObjs[i] = new Star(startPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
                 }
-                else if (i == 3)
+                else if (i >= 3 && i <= 6)
                 {
-                    baseObjs[i] = new Asteroid(new Point(900, 500), new Point(-1, -1), new Size(1, 1), 2,
-                        0, imageList[rand.Next(7, 11)], new Point(900, 500), new Size(40, 40));
+                    int XAst = (startPoint.X + x * rand.Next(1, 100)) % Width;
+                    int YAst = (startPoint.Y + y * rand.Next(1, 100)) % Height;
+
+                    baseObjs[i] = new Asteroid(new Point(XAst, YAst), new Point(startPoint.X - XAst >= 0 ? 1 : -1,
+                        startPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
+                        rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), new Size(40, 40));
                 }
                 else
                 {
                     baseObjs[i] = new Star(startPoint, new Point(x, y), new Size(1, 1), rand.Next(7, 11), rand.Next(10) * 10, imageList[rand.Next(3, 7)]);
                 }
-                
+
+                baseObjs[baseObjs.Length - 1] = new Bullet(new Point(), new Point(), new Size(), 0, 0, ship, startPoint);
 
                 //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
             }
@@ -79,9 +89,12 @@ namespace StarTravel
 
         static Game()
         {
+            killAsteroids = 0;
         }
+
         public static void Init(Form form)
         {
+            Game.form = form;
             // Графическое устройство для вывода графики            
             Graphics g;
             // Предоставляет доступ к главному буферу графического контекста для текущего приложения
@@ -89,8 +102,13 @@ namespace StarTravel
             g = form.CreateGraphics();
             // Создаем объект (поверхность рисования) и связываем его с формой
             // Запоминаем размеры формы
+            if (form.ClientSize.Width > 1000 || form.ClientSize.Width < 0 || form.ClientSize.Height > 1000 || form.ClientSize.Height < 0)
+            {
+                throw new Exception("Ups...", new ArgumentOutOfRangeException());
+            }
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
+            
             startPoint = new Point(Width / 2, Height / 2);
             // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
@@ -108,7 +126,13 @@ namespace StarTravel
             imageList[9] = Image.FromFile(@"..\..\Астероид3.png");
             imageList[10] = Image.FromFile(@"..\..\Астероид4.png");
             backGround = Image.FromFile(@"..\..\Звёздное небо.png");
-            
+            ship = Image.FromFile(@"..\..\Корабль.png");
+            imageBoomList = new Image[12];
+            for (int i = 0; i < imageBoomList.Length; i++)
+            {
+                imageBoomList[i] = Image.FromFile($"..\\..\\Взрыв{i+1}.png");
+            }
+
             Load();
 
             Timer timer = new Timer { Interval = 30 };
@@ -126,21 +150,45 @@ namespace StarTravel
 
             Buffer.Graphics.Clear(Color.Black);
             Buffer.Graphics.DrawImage(backGround, new Rectangle(0, 0, Width, Height));
+            Array.Sort(baseObjs);
             foreach (BaseObject obj in baseObjs)
                 obj.Draw();
+            
+            Buffer.Graphics.DrawImage(ship, new Rectangle(0, 0, Width, Height));
             Buffer.Render();
         }
 
         public static void Update()
         {
-            foreach (BaseObject obj in baseObjs)
+            try
             {
-                obj.Update();
-                if (obj is Asteroid)
+                foreach (BaseObject obj in baseObjs)
                 {
-                    if (obj.Collision(Bullet.BulletsList)) { System.Media.SystemSounds.Hand.Play(); }
+                    if (killAsteroids != 0 && obj.ID == 2) {
+                        string word;
+                        if (killAsteroids % 10 == 1 && killAsteroids != 11) { word = "астероид"; }
+                        else if (killAsteroids % 10 >= 2 && killAsteroids % 10 <= 4 && (killAsteroids <10 || killAsteroids > 20)) { word = "астероида"; }
+                        else { word = "астероидов"; }
+                        obj.Text = $"Ты убил {killAsteroids} {word}";
+                    }
+                    obj.Update();
+                    if (obj is Asteroid && (obj as Asteroid).Boom == null)
+                    {
+                        if (obj.Collision(Bullet.BulletsList))
+                        {
+                            killAsteroids++;
+                            System.Media.SystemSounds.Hand.Play();
+                            (obj as Asteroid).CreatBoom(imageBoomList);
+                            
+                        }
+                    }
                 }
             }
+            catch (GameObjectException goe)
+            {
+                MessageBox.Show(goe.Message);
+            }
+            
                 
         }
 

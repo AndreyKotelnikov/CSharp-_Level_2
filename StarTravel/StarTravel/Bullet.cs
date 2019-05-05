@@ -10,11 +10,18 @@ namespace StarTravel
     class Bullet : BaseObject
     {
         internal Point FocusPoint { get; private set; }
+        internal static Point LeftGun { get; private set; }
+        internal static Point RightGun { get; private set; }
+        public new Rectangle Rect { get { return new Rectangle(FocusPoint, Size); } }
+
         internal static List<Bullet> BulletsList { get; set; }
 
         static Bullet()
         {
+            int heightOfGuns = 380;
             BulletsList = new List<Bullet>();
+            LeftGun = new Point(213, heightOfGuns + 7);
+            RightGun = new Point(794, heightOfGuns);
         }
 
         public Bullet(Point pos, Point dir, Size size, int closely, int delay, Image image, Point focusPoint, Size? maxSize = null, string text = "")
@@ -26,14 +33,19 @@ namespace StarTravel
 
         public override void Update()
         {
-            if (delay != 0) { delay--; return; }
-            SpaceEngine.Update(this);
+            if (Delay != 0) { Delay--; return; }
+           
+            
         }
 
         public override void Draw()
         {
-            base.Draw();
-            Game.Buffer.Graphics.DrawImage(image, pos.X, pos.Y, size.Width, size.Height);
+            if (Delay != 0) { return; }
+            //Game.Buffer.Graphics.DrawImage(image, pos.X, pos.Y, size.Width, size.Height);
+            Pen pen = new Pen(Color.Red, 4);
+            Game.Buffer.Graphics.DrawLine(pen, LeftGun, FocusPoint);
+            Game.Buffer.Graphics.DrawLine(pen, RightGun, FocusPoint);
+            Delay = 2;
         }
     }
 }

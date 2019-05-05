@@ -21,14 +21,19 @@ namespace StarTravel
             //Game.Buffer.Graphics.DrawLine(Pens.White, pos.X, pos.Y, pos.X + size.Width, pos.Y + size.Height);
             //Game.Buffer.Graphics.DrawLine(Pens.White, pos.X + size.Width, pos.Y, pos.X, pos.Y + size.Height);
 
-            base.Draw();
-            Game.Buffer.Graphics.DrawImage(image, pos.X, pos.Y, size.Width, size.Height);
-            //Font font = new Font("Verdana", (int)(size.Width * 0.9) >= 1 ? (int)(size.Width * 0.9) : 1);
-            //SolidBrush myBrush = new SolidBrush(Color.White);
-            //Game.Buffer.Graphics.DrawString(text, font, myBrush, pos.X + 1, pos.Y + 1);
+            if (Delay != 0) { return; }
+            Game.Buffer.Graphics.DrawImage(image, Pos.X, Pos.Y, Size.Width, Size.Height);
+            if (Text != string.Empty)
+            {
+                double offSet = 0.3;
+                Font font = new Font("Verdana", (int)(Size.Width * offSet) >= 1 ? (int)(Size.Width * offSet) : 1);
+                SolidBrush myBrush = new SolidBrush(Color.White);
+                Game.Buffer.Graphics.DrawString(Text, font, myBrush, Pos.X, Pos.Y + (int)(Size.Height * (1 - offSet)));
+            }
             
+
             //Game.Buffer.Graphics.ResetTransform();
-            
+
             //using (GraphicsPath path = new GraphicsPath())
             //using (Brush brush = new TextureBrush(image))
             //using (Brush brush = new TextureBrush(image, new Rectangle(pos.X, pos.Y, 200, 200))) 
@@ -40,7 +45,7 @@ namespace StarTravel
 
         public override void Update()
         {
-            if (delay != 0) { delay--; return; }
+            if (Delay != 0) { Delay--; return; }
             SpaceEngine.Update(this);
         }
 
