@@ -11,8 +11,7 @@ namespace StarTravel
     {
         internal static List<Asteroid> AsteroidsList { get; set; }
         internal Point StartPoint { get; set; }
-        internal Boom Boom { get; set; }
-        private int boomMaxIndexImage;
+        
 
         static Asteroid()
         {

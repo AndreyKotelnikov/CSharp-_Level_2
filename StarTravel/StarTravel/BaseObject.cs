@@ -14,6 +14,10 @@ namespace StarTravel
         private Size size;
 
         internal int ID { get; private set; }
+        internal int IsBoom { get; private set; }
+        internal Boom Boom { get; set; }
+        protected int boomMaxIndexImage;
+
         internal Point Pos
         {
             get { return pos; }

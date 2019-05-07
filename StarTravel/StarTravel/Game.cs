@@ -164,12 +164,9 @@ namespace StarTravel
             {
                 foreach (BaseObject obj in baseObjs)
                 {
-                    if (killAsteroids != 0 && obj.ID == 2) {
-                        string word;
-                        if (killAsteroids % 10 == 1 && killAsteroids != 11) { word = "астероид"; }
-                        else if (killAsteroids % 10 >= 2 && killAsteroids % 10 <= 4 && (killAsteroids <10 || killAsteroids > 20)) { word = "астероида"; }
-                        else { word = "астероидов"; }
-                        obj.Text = $"Ты убил {killAsteroids} {word}";
+                    if (killAsteroids != 0 && obj.ID == 2)
+                    {
+                        obj.Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
                     }
                     obj.Update();
                     if (obj is Asteroid && (obj as Asteroid).Boom == null)
