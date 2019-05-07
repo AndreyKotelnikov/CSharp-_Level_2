@@ -10,7 +10,7 @@ namespace StarTravel
     class Asteroid : BaseObject
     {
         internal static List<Asteroid> AsteroidsList { get; set; }
-        internal Point StartPoint { get; set; }
+        
         
 
         static Asteroid()
@@ -27,20 +27,18 @@ namespace StarTravel
             Boom = null;
         }
 
-        internal void CreatBoom(Image[] images)
-        {
-            boomMaxIndexImage = images.Length - 1;
-            Boom = new Boom(Pos, Dir, Size, Closely, images, StartPoint);
-        }
+        
 
         public override void Update()
         {
-            if (Boom != null && Boom.IndexImage >= boomMaxIndexImage)
+            if (IsBoom)
             {
-                Boom = null;
-                NewAsteroid(0, 100);
+                if (Boom.EndBoom)
+                {
+                    NewStartPosition(0, 100);
+                }
+                else { Boom.Update(); }
             }
-            if (Boom != null) { Boom.Update(); }
             else
             {
                 if (Delay != 0) { Delay--; return; }
@@ -61,10 +59,11 @@ namespace StarTravel
             //Game.Buffer.Graphics.DrawString(text, font, myBrush, pos.X + 1, pos.Y + 1);
         }
 
-        public void NewAsteroid(int seed = 0, int delay = 0)
+        public override void NewStartPosition(int seedForRandom = 0, int delay = 0)
         {
+            base.NewStartPosition();
             Random rand;
-            if (seed == 0) { rand = new Random(); } else { rand = new Random(seed); }
+            if (seedForRandom == 0) { rand = new Random(); } else { rand = new Random(seedForRandom); }
             Point startPoint = new Point(rand.Next(0, Game.Width), rand.Next(0, Game.Height));
             Pos = startPoint;
             StartPoint = startPoint;

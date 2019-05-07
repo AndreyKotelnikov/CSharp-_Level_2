@@ -12,11 +12,14 @@ namespace StarTravel
         private static int countID;
         private Point pos;
         private Size size;
+        
 
         internal int ID { get; private set; }
-        internal int IsBoom { get; private set; }
-        internal Boom Boom { get; set; }
-        protected int boomMaxIndexImage;
+        internal bool IsBoom { get; private set; }
+        protected Boom Boom;
+        
+       
+        internal Point StartPoint { get; set; }
 
         internal Point Pos
         {
@@ -61,6 +64,8 @@ namespace StarTravel
             Delay = delay;
             MaxSize = maxSize ?? new Size(20, 20);
             Text = text;
+            IsBoom = false;
+            
         }
         public virtual void Draw()
         {
@@ -93,6 +98,18 @@ namespace StarTravel
             if (Size.Width > (obj as BaseObject).Size.Width) { return 1; }
             else if (Size.Width < (obj as BaseObject).Size.Width) { return -1; }
             return 0;
+        }
+
+        internal void CreatBoom(Image[] images, int repeatEveryImage = 2)
+        {
+            IsBoom = true;
+            Boom = new Boom(Pos, Dir, Size, Closely, images, StartPoint, repeatEveryImage);
+        }
+
+        public virtual void NewStartPosition(int seedForRandom = 0, int delay = 0)
+        {
+            IsBoom = false;
+            Boom = null;
         }
     }
 

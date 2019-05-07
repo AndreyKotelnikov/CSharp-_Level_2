@@ -14,15 +14,16 @@ namespace StarTravel
         internal int IndexImage { get; private set; }
         private int repeat;
         private int maxRepeat;
+        internal bool EndBoom { get; private set; }
 
-        public Boom(Point pos, Point dir, Size size, int closely, Image[] images, Point startPoint, int delay = 0, Image image = null,
-             Size? maxSize = null, string text = "")
+        public Boom(Point pos, Point dir, Size size, int closely, Image[] images, Point startPoint, int repeatEveryImage, 
+            int delay = 0, Image image = null, Size? maxSize = null, string text = "")
             : base(pos, dir, size, closely,  delay, image, startPoint, maxSize, text)
         {
             this.images = images;
             IndexImage = 0;
             repeat = 0;
-            maxRepeat = 2;
+            maxRepeat = repeatEveryImage;
         }
 
         public override void Update()
@@ -43,6 +44,7 @@ namespace StarTravel
                     repeat = 0;
                 }
             }
+            else { EndBoom = true; }
             
         }
     }

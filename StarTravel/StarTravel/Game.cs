@@ -169,7 +169,7 @@ namespace StarTravel
                         obj.Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
                     }
                     obj.Update();
-                    if (obj is Asteroid && (obj as Asteroid).Boom == null)
+                    if (obj is Asteroid && obj.IsBoom == false)
                     {
                         if (obj.Collision(Bullet.BulletsList))
                         {

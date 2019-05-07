@@ -82,7 +82,7 @@ namespace StarTravel
                 if (bObj is Asteroid)
                 {
                     count++;
-                    (bObj as Asteroid).NewAsteroid(count);
+                    (bObj as Asteroid).NewStartPosition(count);
                 }
                 else
                 {

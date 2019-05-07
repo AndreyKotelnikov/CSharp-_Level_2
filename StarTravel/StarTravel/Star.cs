@@ -49,5 +49,10 @@ namespace StarTravel
             SpaceEngine.Update(this);
         }
 
+        public override void NewStartPosition(int seedForRandom = 0, int delay = 0)
+        {
+            
+        }
+
     }
 }
