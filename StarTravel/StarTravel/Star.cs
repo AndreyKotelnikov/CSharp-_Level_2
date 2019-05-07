@@ -10,8 +10,8 @@ namespace StarTravel
 {
     class Star:BaseObject
     {
-        public Star(Point pos, Point dir, Size size, int closely, int delay, Image image, Size? maxSize = null, string text = "") 
-            : base(pos, dir, size, closely, image, delay, maxSize, text)
+        public Star(Point pos, Point dir, Size size, int closely, int delay, Image image, Point? focusPoint = null, Size? maxSize = null, string text = "") 
+            : base(pos, dir, size, closely, image, focusPoint, delay, maxSize, text)
         {
             
         }
@@ -51,7 +51,8 @@ namespace StarTravel
 
         public override void NewStartPosition(int seedForRandom = 0, int delay = 0)
         {
-            
+            Pos = Game.startPoint;
+            Size = new Size(1, 1);
         }
 
     }

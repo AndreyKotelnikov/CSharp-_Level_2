@@ -7,21 +7,45 @@ using System.Threading.Tasks;
 
 namespace StarTravel
 {
-    abstract class BaseObject: ICollision, IComparable
+    /// <summary>
+    /// Базовый абстрактный класс для космических объектов
+    /// </summary>
+    abstract class BaseObject: ICollision, IComparable, ISpaceMove
     {
+        /// <summary>
+        /// ID объекта
+        /// </summary>
         private static int countID;
+        /// <summary>
+        /// Текущая позиция объекта
+        /// </summary>
         private Point pos;
+
+        /// <summary>
+        /// Текущий размер объекта
+        /// </summary>
         private Size size;
         
-
+        /// <summary>
+        /// ID объекта
+        /// </summary>
         internal int ID { get; private set; }
+        /// <summary>
+        /// Объект взрывается?
+        /// </summary>
         internal bool IsBoom { get; private set; }
+        /// <summary>
+        /// Ссылка на объект взрыва
+        /// </summary>
         protected Boom Boom;
-        
-       
-        internal Point StartPoint { get; set; }
-
-        internal Point Pos
+        /// <summary>
+        /// Точка фокусировки объекта в космосе (объект летит из неё или в неё)
+        /// </summary>
+        public Point FocusPoint { get; protected set; }
+        /// <summary>
+        /// Текущая позиция объекта
+        /// </summary>
+        public Point Pos
         {
             get { return pos; }
             set
@@ -30,8 +54,14 @@ namespace StarTravel
                 else { pos = value; }
             }
         }
-        internal Point Dir { get; set; }
-        internal Size Size
+        /// <summary>
+        /// Текущая директория движения объекта
+        /// </summary>
+        public Point Dir { get; protected set; }
+        /// <summary>
+        /// Текущий размер объекта
+        /// </summary>
+        public Size Size
         {
             get { return size; }
             set
@@ -40,11 +70,29 @@ namespace StarTravel
                 else { size = value; }
             }
         }
-        internal Size MaxSize { get; set; }
-        internal int Closely { get; set; } //0 - очень близко, 10 - очень далеко
+        /// <summary>
+        /// Максимальный размер объекта
+        /// </summary>
+        public Size MaxSize { get; protected set; }
+        /// <summary>
+        /// Близость траектории движения объекта к кораблю (0 - очень близко, 10 - очень далеко)
+        /// </summary>
+        public int Closely { get; protected set; }
+        /// <summary>
+        /// Картинка, которой отображается объект
+        /// </summary>
         protected Image image;
+        /// <summary>
+        /// Задержка на количество попыток отрисовки объекта до начала его отрисовки
+        /// </summary>
         internal int Delay { get; set; }
+        /// <summary>
+        /// Текст, который отображается на объекте
+        /// </summary>
         internal string Text { get; set; }
+        /// <summary>
+        /// Площадь объекта на форме
+        /// </summary>
         public Rectangle Rect { get { return new Rectangle(Pos, Size); } }
 
         static BaseObject()
@@ -52,7 +100,7 @@ namespace StarTravel
             countID = 0;
         }
 
-        public BaseObject(Point pos, Point dir, Size size, int closely, Image image = null, int delay = 0, Size? maxSize = null, string text = "")
+        public BaseObject(Point pos, Point dir, Size size, int closely, Image image = null, Point? focusPoint = null, int delay = 0, Size? maxSize = null, string text = "")
         {
             ID = countID;
             countID++;
@@ -61,6 +109,7 @@ namespace StarTravel
             Size = size;
             Closely = closely <= 10 ? closely : 10;
             this.image = image;
+            FocusPoint = focusPoint?? Game.startPoint;
             Delay = delay;
             MaxSize = maxSize ?? new Size(20, 20);
             Text = text;
@@ -103,7 +152,7 @@ namespace StarTravel
         internal void CreatBoom(Image[] images, int repeatEveryImage = 2)
         {
             IsBoom = true;
-            Boom = new Boom(Pos, Dir, Size, Closely, images, StartPoint, repeatEveryImage);
+            Boom = new Boom(Pos, Dir, Size, Closely, images, FocusPoint, repeatEveryImage);
         }
 
         public virtual void NewStartPosition(int seedForRandom = 0, int delay = 0)

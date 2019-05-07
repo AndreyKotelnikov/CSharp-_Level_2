@@ -9,7 +9,6 @@ namespace StarTravel
 {
     class Bullet : BaseObject
     {
-        internal Point FocusPoint { get; private set; }
         internal static Point LeftGun { get; private set; }
         internal static Point RightGun { get; private set; }
         public new Rectangle Rect { get { return new Rectangle(FocusPoint, Size); } }
@@ -25,10 +24,9 @@ namespace StarTravel
         }
 
         public Bullet(Point pos, Point dir, Size size, int closely, int delay, Image image, Point focusPoint, Size? maxSize = null, string text = "")
-            : base(pos, dir, size, closely, image, delay, maxSize, text)
+            : base(pos, dir, size, closely, image, focusPoint, delay, maxSize, text)
         {
             BulletsList.Add(this);
-            FocusPoint = focusPoint;
         }
 
         public override void Update()

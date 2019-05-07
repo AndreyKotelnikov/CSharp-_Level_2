@@ -17,45 +17,31 @@ namespace StarTravel
         static int offsetY;
         static int width;
         static int height;
-        static Point pointOfCentre;
+        static Point focusPoint;
         static int count;
 
-        internal static void Update(BaseObject bObj)
+        internal static void Update(ISpaceMove bObj)
         {
+            focusPoint = bObj.FocusPoint;
+
             if (bObj is Asteroid || bObj is Boom)
             {
-                pointOfCentre = (bObj as Asteroid).StartPoint;
-                
                 DefineSpeedUpAsteroid(bObj);
-
-                //if (bObj.closely == 0)
-                //{
-                //    UpdateSizeAsteroidForCollision(bObj);
-                //    UpdatePositionForCollision(bObj);
-                //}
-                //else
-                //{
-                    UpdateSizeAsteroid(bObj);
-                    UpdatePosition(bObj);
-                //}
+                UpdatePosition(bObj);
+                UpdateSizeAsteroid(bObj);
             }
             else if (bObj is Bullet)
             {
-                pointOfCentre = (bObj as Bullet).FocusPoint;
                 DefineSpeedUp(bObj);
                 UpdatePosition(bObj);
                 UpdateSize(bObj);
             }
             else
             {
-                pointOfCentre = Game.startPoint;
                 DefineSpeedUp(bObj);
                 UpdatePosition(bObj);
                 UpdateSize(bObj);
             }
-
-            UpdatePosition(bObj);
-            
             CheckingOutOfScreen(bObj);
             //bObj.Text = speedUp.ToString();
         }
@@ -66,47 +52,39 @@ namespace StarTravel
         //        bObj.Pos.Y < 0 ? (int)(-bObj.Size.Height * 0.1) : (bObj.Pos.Y - bObj.Size.Height * speedUp / 50 - Game.Height / (Game.Height - bObj.Pos.Y)));
         //}
 
-        private static void DefineSpeedUpAsteroid(BaseObject bObj)
+        private static void DefineSpeedUpAsteroid(ISpaceMove bObj)
         {
-            XSpeedUp = (int)(Math.Abs((bObj.Dir.X > 0) ? ((double)bObj.Pos.X / (Game.Width - pointOfCentre.X)) : ((double)(pointOfCentre.X - bObj.Pos.X) / pointOfCentre.X)) * 10);
-            YSpeedUp = (int)(Math.Abs((bObj.Dir.Y > 0) ? ((double)bObj.Pos.Y / (Game.Height - pointOfCentre.Y)) : ((double)(pointOfCentre.Y - bObj.Pos.Y) / pointOfCentre.Y)) * 10);
+            XSpeedUp = (int)(Math.Abs((bObj.Dir.X > 0) ? ((double)bObj.Pos.X / (Game.Width - focusPoint.X)) : ((double)(focusPoint.X - bObj.Pos.X) / focusPoint.X)) * 10);
+            YSpeedUp = (int)(Math.Abs((bObj.Dir.Y > 0) ? ((double)bObj.Pos.Y / (Game.Height - focusPoint.Y)) : ((double)(focusPoint.Y - bObj.Pos.Y) / focusPoint.Y)) * 10);
 
             speedUp = XSpeedUp > YSpeedUp ? XSpeedUp : YSpeedUp;
             if (speedUp == 0) { speedUp = 1; }
         }
 
-        private static void CheckingOutOfScreen(BaseObject bObj)
+        private static void CheckingOutOfScreen(ISpaceMove bObj)
         {
             if (bObj.Pos.X + width < 0 || bObj.Pos.X - width > Game.Width || bObj.Pos.Y + height < 0 || bObj.Pos.Y - height > Game.Height)
             {
-                if (bObj is Asteroid)
-                {
-                    count++;
-                    (bObj as Asteroid).NewStartPosition(count);
-                }
-                else
-                {
-                    bObj.Pos = pointOfCentre;
-                }
-                bObj.Size = new Size(1, 1);
+               count++;
+               bObj.NewStartPosition(count, 0);
             }
         }
 
-        private static void UpdateSize(BaseObject bObj)
+        private static void UpdateSize(ISpaceMove bObj)
         {
-            width = (int)(bObj.MaxSize.Width * ((double)Math.Abs(pointOfCentre.X - bObj.Pos.X)) / pointOfCentre.X  * (11 - bObj.Closely));
+            width = (int)(bObj.MaxSize.Width * ((double)Math.Abs(focusPoint.X - bObj.Pos.X)) / focusPoint.X  * (11 - bObj.Closely));
             if (width == 0) { width = 1; }
-            height = (int)(bObj.MaxSize.Height * ((double)Math.Abs(pointOfCentre.Y - bObj.Pos.Y)) / pointOfCentre.Y  * (11 - bObj.Closely));
+            height = (int)(bObj.MaxSize.Height * ((double)Math.Abs(focusPoint.Y - bObj.Pos.Y)) / focusPoint.Y  * (11 - bObj.Closely));
             if (height == 0) { height = 1; }
             if (width >= height) { bObj.Size = new Size(width, width); }
             else { bObj.Size = new Size(height, height); }
         }
 
-        private static void UpdateSizeAsteroid(BaseObject bObj)
+        private static void UpdateSizeAsteroid(ISpaceMove bObj)
         {
-            width = (int)(bObj.MaxSize.Width * (Math.Abs((bObj.Dir.X > 0) ? ((double)bObj.Pos.X / (Game.Width - pointOfCentre.X)) : ((double)(pointOfCentre.X - bObj.Pos.X) / pointOfCentre.X))  * (11 - bObj.Closely)));
+            width = (int)(bObj.MaxSize.Width * (Math.Abs((bObj.Dir.X > 0) ? ((double)bObj.Pos.X / (Game.Width - focusPoint.X)) : ((double)(focusPoint.X - bObj.Pos.X) / focusPoint.X))  * (11 - bObj.Closely)));
             if (width == 0) { width = 1; }
-            height = (int)(bObj.MaxSize.Height * (Math.Abs((bObj.Dir.Y > 0) ? ((double)bObj.Pos.Y / (Game.Height - pointOfCentre.Y)) : ((double)(pointOfCentre.Y - bObj.Pos.Y) / pointOfCentre.Y)) * (11 - bObj.Closely)));
+            height = (int)(bObj.MaxSize.Height * (Math.Abs((bObj.Dir.Y > 0) ? ((double)bObj.Pos.Y / (Game.Height - focusPoint.Y)) : ((double)(focusPoint.Y - bObj.Pos.Y) / focusPoint.Y)) * (11 - bObj.Closely)));
             if (height == 0) { height = 1; }
             if (width >= height) { bObj.Size = new Size(width, width); }
             else { bObj.Size = new Size(height, height); }
@@ -122,7 +100,7 @@ namespace StarTravel
         //    else { bObj.Size = new Size(height, height); }
         //}
 
-        private static void UpdatePosition(BaseObject bObj)
+        private static void UpdatePosition(ISpaceMove bObj)
         {
             maxDir = Math.Abs(bObj.Dir.X) >= Math.Abs(bObj.Dir.Y) ? Math.Abs(bObj.Dir.X) : Math.Abs(bObj.Dir.Y);
             if (maxDir == 0) { maxDir = 1; }
@@ -133,10 +111,10 @@ namespace StarTravel
             bObj.Pos = new Point(bObj.Pos.X + offsetX, bObj.Pos.Y + offsetY);
         }
 
-        private static void DefineSpeedUp(BaseObject bObj)
+        private static void DefineSpeedUp(ISpaceMove bObj)
         {
-            XSpeedUp = (int)(((double)Math.Abs(pointOfCentre.X - bObj.Pos.X)) / pointOfCentre.X * 10);
-            YSpeedUp = (int)(((double)Math.Abs(pointOfCentre.Y - bObj.Pos.Y)) / pointOfCentre.Y * 10);
+            XSpeedUp = (int)(((double)Math.Abs(focusPoint.X - bObj.Pos.X)) / focusPoint.X * 10);
+            YSpeedUp = (int)(((double)Math.Abs(focusPoint.Y - bObj.Pos.Y)) / focusPoint.Y * 10);
 
             speedUp = XSpeedUp > YSpeedUp ? XSpeedUp : YSpeedUp;
             if (speedUp == 0) { speedUp = 1; }

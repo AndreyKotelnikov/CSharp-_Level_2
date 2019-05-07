@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace StarTravel
 {
+    /// <summary>
+    /// Запускает игру
+    /// </summary>
     static class Game
     {
         private static BufferedGraphicsContext _context;
@@ -25,7 +28,9 @@ namespace StarTravel
         public static Form form;
         private static int killAsteroids;
 
-
+        /// <summary>
+        /// Создаёт основные объекты игры
+        /// </summary>
         public static void Load()
         {
             baseObjs = new BaseObject[30];
@@ -87,11 +92,18 @@ namespace StarTravel
 
         }
 
+        /// <summary>
+        /// Статический конструктор класса
+        /// </summary>
         static Game()
         {
             killAsteroids = 0;
         }
 
+        /// <summary>
+        /// Производит инициализацию начальных настроек игры и загрузку картинок
+        /// </summary>
+        /// <param name="form">Ссылка на форму нужна для вывода сообщений об исключительных ситуациях</param>
         public static void Init(Form form)
         {
             Game.form = form;
@@ -140,6 +152,9 @@ namespace StarTravel
             timer.Tick += Timer_Tick;
         }
 
+        /// <summary>
+        /// Отрисовывает графические объекты игры
+        /// </summary>
         public static void Draw()
         {
             // Проверяем вывод графики
@@ -158,6 +173,9 @@ namespace StarTravel
             Buffer.Render();
         }
 
+        /// <summary>
+        /// Изменяет состояния объектов игры
+        /// </summary>
         public static void Update()
         {
             try
@@ -189,6 +207,11 @@ namespace StarTravel
                 
         }
 
+        /// <summary>
+        /// Отрабатывает отрисовку и обновление объектов игры по событию
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void Timer_Tick(object sender, EventArgs e)
         {
             Draw();
