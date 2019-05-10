@@ -17,8 +17,9 @@ namespace StarTravel
         internal bool EndBoom { get; private set; }
 
         public Boom(Point pos, Point dir, Size size, int closely, Image[] images, Point startPoint, int repeatEveryImage, 
-            int drawingPriority, int delay = 0, Image image = null, Size? maxSize = null, string text = "")
-            : base(pos, dir, size, closely,  delay, image, startPoint, drawingPriority, maxSize, text)
+            int drawingPriority, KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.NoDamageSpaceObject, 
+            int delay = 0, Image image = null, Size? maxSize = null, string text = "")
+            : base(pos, dir, size, closely,  delay, kindOfCollisionObject, image, startPoint, drawingPriority, maxSize, text)
         {
             this.images = images;
             IndexImage = 0;

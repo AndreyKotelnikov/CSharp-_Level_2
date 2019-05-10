@@ -8,7 +8,8 @@ namespace StarTravel
 {
     interface ICollision
     {
-        bool Collision(List<Bullet> obj);
+        KindOfCollisionObject KindOfCollisionObject { get; }
+        bool Collision(IDraw[] obj);
         Rectangle Rect { get; }
     }
 }

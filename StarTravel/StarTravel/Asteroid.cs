@@ -9,26 +9,15 @@ namespace StarTravel
 {
     class Asteroid : BaseObject
     {
-        internal static List<Asteroid> AsteroidsList { get; set; }
-        
-        
-
-        static Asteroid()
-        {
-            AsteroidsList = new List<Asteroid>();
-        }
-
         public Asteroid(Point pos, Point dir, Size size, int closely, int delay, Image image, 
-            Point focusPoint, int drawingPriority = 5, Size? maxSize = null, string text = "")
-            : base(pos, dir, size, closely, drawingPriority, image, focusPoint, delay, maxSize, text)
+            Point focusPoint, KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.DamageSpaceObject, 
+            int drawingPriority = 5, Size? maxSize = null, string text = "")
+            : base(pos, dir, size, closely, drawingPriority, kindOfCollisionObject, image, focusPoint, delay, maxSize, text)
         {
-            AsteroidsList.Add(this);
             FocusPoint = focusPoint;
             Boom = null;
         }
-
         
-
         public override void Update()
         {
             if (IsBoom)

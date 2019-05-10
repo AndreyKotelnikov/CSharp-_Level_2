@@ -10,8 +10,9 @@ namespace StarTravel
 {
     class Star:BaseObject
     {
-        public Star(Point pos, Point dir, Size size, int closely, int delay, Image image, int drawingPriority = 10, Point? focusPoint = null, Size? maxSize = null, string text = "") 
-            : base(pos, dir, size, closely, drawingPriority, image, focusPoint, delay, maxSize, text)
+        public Star(Point pos, Point dir, Size size, int closely, int delay, Image image, 
+            KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.NoDamageSpaceObject, int drawingPriority = 10, Point? focusPoint = null, Size? maxSize = null, string text = "") 
+            : base(pos, dir, size, closely, drawingPriority, kindOfCollisionObject, image, focusPoint, delay, maxSize, text)
         {
             
         }

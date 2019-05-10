@@ -31,6 +31,8 @@ namespace StarTravel
         /// </summary>
         internal int ID { get; private set; }
 
+        public KindOfCollisionObject KindOfCollisionObject { get; private set; }
+
         public int DrawingPriority { get; private set; }
         /// <summary>
         /// Объект взрывается сейчас?
@@ -95,14 +97,16 @@ namespace StarTravel
         /// <summary>
         /// Площадь объекта на форме
         /// </summary>
-        public Rectangle Rect { get { return new Rectangle(Pos, Size); } }
-                
+        public virtual Rectangle Rect { get { return new Rectangle(Pos, Size); } }
+
         static BaseObject()
         {
             countID = 0;
         }
 
-        public BaseObject(Point pos, Point dir, Size size, int closely, int drawingPriority, Image image = null, Point? focusPoint = null, int delay = 0, Size? maxSize = null, string text = "")
+        public BaseObject(Point pos, Point dir, Size size, int closely, int drawingPriority, 
+            KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.NoDamageSpaceObject, Image image = null, 
+            Point? focusPoint = null, int delay = 0, Size? maxSize = null, string text = "")
         {
             ID = countID;
             countID++;
@@ -111,6 +115,7 @@ namespace StarTravel
             Size = size;
             Closely = closely <= 10 ? closely : 10;
             DrawingPriority = drawingPriority;
+            KindOfCollisionObject = kindOfCollisionObject;
             this.image = image;
             FocusPoint = focusPoint?? Game.StartPoint;
             Delay = delay;
@@ -130,11 +135,14 @@ namespace StarTravel
         public abstract void Update();
         
 
-        public bool Collision(List<Bullet> o)
+        public virtual bool Collision(IDraw[] o)
         {
             foreach (var item in o)
             {
-                if (item.Rect.IntersectsWith(Rect)) { return true; }
+                if ( item is ICollision && (item as ICollision).KindOfCollisionObject == KindOfCollisionObject.Weapon 
+                    //|| (item as ICollision).KindOfCollisionObject == KindOfCollisionObject.Ship)
+                    && (item as ICollision).Rect.IntersectsWith(Rect))
+                { return true; }
             }
             return false;
         }

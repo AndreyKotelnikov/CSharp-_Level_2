@@ -191,13 +191,15 @@ namespace StarTravel
                     if (obj is IUpdate)
                     {
                         (obj as IUpdate).Update();
-                        if (obj is Asteroid && (obj as IBoom).IsBoom == false)
+                        if (obj is ICollision && obj is IBoom 
+                            && (obj as ICollision).KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject
+                            && (obj as IBoom).IsBoom == false)
                         {
-                            if ((obj as Asteroid).Collision(Bullet.BulletsList))
+                            if ((obj as ICollision).Collision(objsForGame))
                             {
                                 killAsteroids++;
                                 System.Media.SystemSounds.Hand.Play();
-                                (obj as Asteroid).CreatBoom(imageBoomList);
+                                (obj as IBoom).CreatBoom(imageBoomList, 2);
                             }
                         }
                     }
