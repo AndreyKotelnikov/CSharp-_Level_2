@@ -24,13 +24,7 @@ namespace StarTravel
 
             if (Delay != 0) { return; }
             Game.Buffer.Graphics.DrawImage(image, Pos.X, Pos.Y, Size.Width, Size.Height);
-            if (Text != string.Empty)
-            {
-                double offSet = 0.3;
-                Font font = new Font("Verdana", (int)(Size.Width * offSet) >= 1 ? (int)(Size.Width * offSet) : 1);
-                SolidBrush myBrush = new SolidBrush(Color.White);
-                Game.Buffer.Graphics.DrawString(Text, font, myBrush, Pos.X, Pos.Y + (int)(Size.Height * (1 - offSet)));
-            }
+            base.Draw();
             
 
             //Game.Buffer.Graphics.ResetTransform();

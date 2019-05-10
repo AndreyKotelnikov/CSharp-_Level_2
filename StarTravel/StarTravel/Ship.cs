@@ -21,7 +21,17 @@ namespace StarTravel
         public Rectangle Rect { get { return new Rectangle(Pos, Size); } }
 
         private Image image;
-        
+
+        private int energy = 100;
+
+        public int Energy => energy;
+
+        public void EnergyLow(int n)
+        {
+            energy -= n;
+        }
+
+
         public Ship(Image image, Size size, Point? pos = null, int drawingPriority = 0, int closely = 0, 
             KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Ship)
         {
@@ -36,6 +46,7 @@ namespace StarTravel
         public void Draw()
         {
             Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos, Size));
+            Game.Buffer.Graphics.DrawString($"Energy: {Energy}", SystemFonts.DefaultFont, Brushes.White, 0, 0);
         }
 
         public bool Collision(IDraw[] obj)
@@ -47,5 +58,10 @@ namespace StarTravel
             }
             return false;
         }
+
+        public void Die()
+        {
+        }
+
     }
 }

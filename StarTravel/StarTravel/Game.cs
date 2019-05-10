@@ -20,6 +20,7 @@ namespace StarTravel
         public static int Width { get; private set; }
         public static int Height { get; private set; }
         public static Point StartPoint { get; private set; }
+        public static Ship Ship { get; private set; }
         private static IDraw[] objsForGame;
         private static Image[] imageList;
         private static Image[] imageBoomList;
@@ -83,7 +84,8 @@ namespace StarTravel
                 }
 
                 objsForGame[objsForGame.Length - 2] = new Bullet(new Point(), new Point(), new Size(), 0, 0, imageShip, StartPoint);
-                objsForGame[objsForGame.Length - 1] = new Ship(imageShip, new Size(Width, Height));
+                Ship = new Ship(imageShip, new Size(Width, Height));
+                objsForGame[objsForGame.Length - 1] = Ship;
 
                 //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
             }

@@ -16,6 +16,7 @@ namespace StarTravel
         {
             FocusPoint = focusPoint;
             Boom = null;
+            Text = Closely.ToString();
         }
         
         public override void Update()
@@ -42,10 +43,8 @@ namespace StarTravel
             {
                 if (Delay != 0) { return; }
                 Game.Buffer.Graphics.DrawImage(image, Pos.X, Pos.Y, Size.Width, Size.Height);
+                base.Draw();
             }
-            //Font font = new Font("Verdana", (int)(size.Width * 0.9) >= 1 ? (int)(size.Width * 0.9) : 1);
-            //SolidBrush myBrush = new SolidBrush(Color.White);
-            //Game.Buffer.Graphics.DrawString(text, font, myBrush, pos.X + 1, pos.Y + 1);
         }
 
         public override void NewStartPosition(int seedForRandom = 0, int delay = 0)
@@ -60,7 +59,8 @@ namespace StarTravel
             int size = rand.Next(1, 30);
             MaxSize = new Size(size, size);
             if (delay == 0) { Delay = rand.Next(1, 100); } else { Delay = delay; }
-            Closely = rand.Next(0, 10);
+            Closely = rand.Next(0, 3);
+            Text = Closely.ToString();
             Dir = new Point(Game.StartPoint.X - Pos.X >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5),
                 Game.StartPoint.Y - Pos.Y >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5));
         }

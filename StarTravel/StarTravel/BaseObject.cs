@@ -124,14 +124,17 @@ namespace StarTravel
             IsBoom = false;
             
         }
-        public abstract void Draw();
-        //{
-            //if (delay != 0) { return; }
-            //Game.Buffer.Graphics.DrawEllipse(Pens.White, pos.X, pos.Y, size.Width, size.Height);
-            //Font font = new Font("Verdana", (int)(size.Width * 0.9) >= 1 ? (int)(size.Width * 0.9) : 1);
-            //SolidBrush myBrush = new SolidBrush(Color.White);
-            //Game.Buffer.Graphics.DrawString(text, font, myBrush, pos.X + 1, pos.Y + 1);
-        //}
+        public virtual void Draw()
+        {
+            if (Text != string.Empty)
+            {
+                double offSet = 0.3;
+                Font font = new Font("Verdana", (int)(Size.Width * offSet) >= 1 ? (int)(Size.Width * offSet) : 1);
+                SolidBrush myBrush = new SolidBrush(Color.White);
+                Game.Buffer.Graphics.DrawString(Text, font, myBrush, Pos.X, Pos.Y + (int)(Size.Height * (1 - offSet)));
+            }
+        }
+        
         public abstract void Update();
         
 
@@ -168,6 +171,11 @@ namespace StarTravel
 
         public virtual void NewStartPosition(int seedForRandom = 0, int delay = 0)
         {
+            if (KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject && Closely == 0 && IsBoom == false)
+            {
+                Random rand = new Random();
+                Game.Ship.EnergyLow(rand.Next(MaxSize.Width / 2, MaxSize.Width));
+            }
             IsBoom = false;
             Boom = null;
         }
