@@ -60,6 +60,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameObjectException.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="IBoom.cs" />
     <Compile Include="ICollision.cs" />
     <Compile Include="IDraw.cs" />
     <Compile Include="ISpaceMove.cs" />

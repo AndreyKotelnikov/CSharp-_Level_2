@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace StarTravel
 {
     
-    class Boom : Asteroid
+    class Boom : BaseObject
     {
         private Image[] images;
         private int IndexImage;

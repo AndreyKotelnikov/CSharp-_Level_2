@@ -75,7 +75,7 @@ namespace StarTravel
 
                     objsForGame[i] = new Asteroid(new Point(XAst, YAst), new Point(StartPoint.X - XAst >= 0 ? 1 : -1,
                         StartPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
-                        rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), maxSize: new Size(40, 40));
+                        rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), maxSize: new Size(20, 20));
                 }
                 else
                 {
@@ -191,14 +191,13 @@ namespace StarTravel
                     if (obj is IUpdate)
                     {
                         (obj as IUpdate).Update();
-                        if (obj is Asteroid && (obj as Asteroid).IsBoom == false)
+                        if (obj is Asteroid && (obj as IBoom).IsBoom == false)
                         {
                             if ((obj as Asteroid).Collision(Bullet.BulletsList))
                             {
                                 killAsteroids++;
                                 System.Media.SystemSounds.Hand.Play();
                                 (obj as Asteroid).CreatBoom(imageBoomList);
-
                             }
                         }
                     }

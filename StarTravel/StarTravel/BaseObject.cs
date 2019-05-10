@@ -10,7 +10,7 @@ namespace StarTravel
     /// <summary>
     /// Базовый абстрактный класс для космических объектов
     /// </summary>
-    abstract class BaseObject: ICollision, ISpaceMove, IDraw, IUpdate
+    abstract class BaseObject: ICollision, ISpaceMove, IDraw, IUpdate, IBoom
     {
         /// <summary>
         /// ID объекта
@@ -35,11 +35,11 @@ namespace StarTravel
         /// <summary>
         /// Объект взрывается сейчас?
         /// </summary>
-        internal bool IsBoom { get; private set; }
+        public bool IsBoom { get; private set; }
         /// <summary>
         /// Ссылка на объект взрыва
         /// </summary>
-        protected Boom Boom;
+        public Boom Boom { get; protected set; }
         /// <summary>
         /// Точка фокусировки объекта в космосе (объект летит из неё или в неё)
         /// </summary>
@@ -152,7 +152,7 @@ namespace StarTravel
         //    return 0;
         //}
 
-        internal void CreatBoom(Image[] images, int repeatEveryImage = 2)
+        public void CreatBoom(Image[] images, int repeatEveryImage = 2)
         {
             IsBoom = true;
             Boom = new Boom(Pos, Dir, Size, Closely, images, FocusPoint, repeatEveryImage, DrawingPriority);
