@@ -17,28 +17,29 @@ namespace StarTravel
         public static BufferedGraphics Buffer;
         // Свойства
         // Ширина и высота игрового поля
-        public static int Width { get; set; }
-        public static int Height { get; set; }
-        public static Point startPoint;
-        public static BaseObject[] baseObjs;
-        public static Image[] imageList;
-        public static Image[] imageBoomList;
-        public static Image backGround;
-        public static Image ship;
-        public static Form form;
+        public static int Width { get; private set; }
+        public static int Height { get; private set; }
+        public static Point StartPoint { get; private set; }
+        private static IDraw[] objsForGame;
+        private static Image[] imageList;
+        private static Image[] imageBoomList;
+        private static Image imageBackGround;
+        private static Image imageShip;
+        private static Form form;
         private static int killAsteroids;
+        private static ComparisonForDrawing comparisonForDrawing;
 
         /// <summary>
         /// Создаёт основные объекты игры
         /// </summary>
         public static void Load()
         {
-            baseObjs = new BaseObject[30];
+            objsForGame = new IDraw[30];
             Random rand = new Random();
             int x = 1;
             int y = 1;
             int maxNumber = 10;
-            for (int i = 0; i < baseObjs.Length - 1; i++)
+            for (int i = 0; i < objsForGame.Length - 2; i++)
             {
                 switch (i % 4)
                 {
@@ -65,23 +66,24 @@ namespace StarTravel
                 else { y = y / Math.Abs(y); }
                 if (i <= 2)
                 {
-                    baseObjs[i] = new Star(startPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
+                    objsForGame[i] = new Star(StartPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
                 }
                 else if (i >= 3 && i <= 6)
                 {
-                    int XAst = (startPoint.X + x * rand.Next(1, 100)) % Width;
-                    int YAst = (startPoint.Y + y * rand.Next(1, 100)) % Height;
+                    int XAst = (StartPoint.X + x * rand.Next(1, 100)) % Width;
+                    int YAst = (StartPoint.Y + y * rand.Next(1, 100)) % Height;
 
-                    baseObjs[i] = new Asteroid(new Point(XAst, YAst), new Point(startPoint.X - XAst >= 0 ? 1 : -1,
-                        startPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
-                        rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), new Size(40, 40));
+                    objsForGame[i] = new Asteroid(new Point(XAst, YAst), new Point(StartPoint.X - XAst >= 0 ? 1 : -1,
+                        StartPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
+                        rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), maxSize: new Size(40, 40));
                 }
                 else
                 {
-                    baseObjs[i] = new Star(startPoint, new Point(x, y), new Size(1, 1), rand.Next(7, 11), rand.Next(10) * 10, imageList[rand.Next(3, 7)]);
+                    objsForGame[i] = new Star(StartPoint, new Point(x, y), new Size(1, 1), rand.Next(7, 11), rand.Next(10) * 10, imageList[rand.Next(3, 7)]);
                 }
 
-                baseObjs[baseObjs.Length - 1] = new Bullet(new Point(), new Point(), new Size(), 0, 0, ship, startPoint);
+                objsForGame[objsForGame.Length - 2] = new Bullet(new Point(), new Point(), new Size(), 0, 0, imageShip, StartPoint);
+                objsForGame[objsForGame.Length - 1] = new Ship(imageShip, new Size(Width, Height));
 
                 //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
             }
@@ -89,7 +91,8 @@ namespace StarTravel
             //    _objs[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20), i.ToString());
             //for (int i = _objs.Length / 2; i < _objs.Length; i++)
             //    _objs[i] = new Star(new Point(600, (i - (_objs.Length / 2)) * 20), new Point(i, 0), new Size(20, 20), i.ToString());
-
+            
+            comparisonForDrawing = new ComparisonForDrawing();
         }
 
         /// <summary>
@@ -121,7 +124,7 @@ namespace StarTravel
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
             
-            startPoint = new Point(Width / 2, Height / 2);
+            StartPoint = new Point(Width / 2, Height / 2);
             // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
@@ -137,8 +140,8 @@ namespace StarTravel
             imageList[8] = Image.FromFile(@"..\..\Астероид2.png");
             imageList[9] = Image.FromFile(@"..\..\Астероид3.png");
             imageList[10] = Image.FromFile(@"..\..\Астероид4.png");
-            backGround = Image.FromFile(@"..\..\Звёздное небо.png");
-            ship = Image.FromFile(@"..\..\Корабль.png");
+            imageBackGround = Image.FromFile(@"..\..\Звёздное небо.png");
+            imageShip = Image.FromFile(@"..\..\Корабль.png");
             imageBoomList = new Image[12];
             for (int i = 0; i < imageBoomList.Length; i++)
             {
@@ -164,12 +167,11 @@ namespace StarTravel
             //Buffer.Render();
 
             Buffer.Graphics.Clear(Color.Black);
-            Buffer.Graphics.DrawImage(backGround, new Rectangle(0, 0, Width, Height));
-            Array.Sort(baseObjs);
-            foreach (BaseObject obj in baseObjs)
+            Buffer.Graphics.DrawImage(imageBackGround, new Rectangle(0, 0, Width, Height));
+            Array.Sort(objsForGame, comparisonForDrawing.Compare);
+            foreach (IDraw obj in objsForGame)
                 obj.Draw();
-            
-            Buffer.Graphics.DrawImage(ship, new Rectangle(0, 0, Width, Height));
+                        
             Buffer.Render();
         }
 
@@ -180,21 +182,24 @@ namespace StarTravel
         {
             try
             {
-                foreach (BaseObject obj in baseObjs)
+                foreach (IDraw obj in objsForGame)
                 {
-                    if (killAsteroids != 0 && obj.ID == 2)
+                    if (killAsteroids != 0 && (obj is BaseObject) && (obj as BaseObject).ID == 2)
                     {
-                        obj.Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
+                        (obj as BaseObject).Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
                     }
-                    obj.Update();
-                    if (obj is Asteroid && obj.IsBoom == false)
+                    if (obj is IUpdate)
                     {
-                        if (obj.Collision(Bullet.BulletsList))
+                        (obj as IUpdate).Update();
+                        if (obj is Asteroid && (obj as Asteroid).IsBoom == false)
                         {
-                            killAsteroids++;
-                            System.Media.SystemSounds.Hand.Play();
-                            (obj as Asteroid).CreatBoom(imageBoomList);
-                            
+                            if ((obj as Asteroid).Collision(Bullet.BulletsList))
+                            {
+                                killAsteroids++;
+                                System.Media.SystemSounds.Hand.Play();
+                                (obj as Asteroid).CreatBoom(imageBoomList);
+
+                            }
                         }
                     }
                 }

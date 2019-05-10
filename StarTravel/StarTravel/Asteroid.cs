@@ -19,8 +19,8 @@ namespace StarTravel
         }
 
         public Asteroid(Point pos, Point dir, Size size, int closely, int delay, Image image, 
-            Point focusPoint, Size? maxSize = null, string text = "")
-            : base(pos, dir, size, closely, image, focusPoint, delay, maxSize, text)
+            Point focusPoint, int drawingPriority = 5, Size? maxSize = null, string text = "")
+            : base(pos, dir, size, closely, drawingPriority, image, focusPoint, delay, maxSize, text)
         {
             AsteroidsList.Add(this);
             FocusPoint = focusPoint;
@@ -72,8 +72,8 @@ namespace StarTravel
             MaxSize = new Size(size, size);
             if (delay == 0) { Delay = rand.Next(1, 100); } else { Delay = delay; }
             Closely = rand.Next(0, 10);
-            Dir = new Point(Game.startPoint.X - Pos.X >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5),
-                Game.startPoint.Y - Pos.Y >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5));
+            Dir = new Point(Game.StartPoint.X - Pos.X >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5),
+                Game.StartPoint.Y - Pos.Y >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5));
         }
     }
 }

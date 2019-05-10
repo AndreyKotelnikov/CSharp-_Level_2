@@ -50,6 +50,7 @@
     <Compile Include="BaseObject.cs" />
     <Compile Include="Boom.cs" />
     <Compile Include="Bullet.cs" />
+    <Compile Include="ComparisonForDrawing.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,9 +61,12 @@
     <Compile Include="GameObjectException.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ICollision.cs" />
+    <Compile Include="IDraw.cs" />
     <Compile Include="ISpaceMove.cs" />
+    <Compile Include="IUpdate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ship.cs" />
     <Compile Include="SpaceEngine.cs" />
     <Compile Include="Star.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

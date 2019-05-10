@@ -23,8 +23,8 @@ namespace StarTravel
             RightGun = new Point(794, heightOfGuns);
         }
 
-        public Bullet(Point pos, Point dir, Size size, int closely, int delay, Image image, Point focusPoint, Size? maxSize = null, string text = "")
-            : base(pos, dir, size, closely, image, focusPoint, delay, maxSize, text)
+        public Bullet(Point pos, Point dir, Size size, int closely, int delay, Image image, Point focusPoint, int drawingPriority = 1, Size? maxSize = null, string text = "")
+            : base(pos, dir, size, closely, drawingPriority, image, focusPoint, delay, maxSize, text)
         {
             BulletsList.Add(this);
         }
