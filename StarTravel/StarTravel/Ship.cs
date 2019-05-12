@@ -35,6 +35,8 @@ namespace StarTravel
         public delegate void EventMessage(object obj, string message);
 
         public event EventMessage MessageDie;
+
+        //public event EventMessage SubscribeToDie
         //{
         //    add { MessageDie += value; }
         //    remove { MessageDie -= value; }

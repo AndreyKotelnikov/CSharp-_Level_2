@@ -182,6 +182,12 @@ namespace StarTravel
             IsBoom = false;
             Boom = null;
         }
+
+        public virtual void Game_KillAsteroid(int killAsteroids)
+        {
+            Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
+        }
+
     }
 
 }

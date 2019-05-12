@@ -13,6 +13,7 @@ namespace StarTravel
     /// </summary>
     static class Game
     {
+        private static Timer timer = new Timer { Interval = 30 };
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
         // Свойства
@@ -29,6 +30,8 @@ namespace StarTravel
         private static Form form;
         private static int killAsteroids;
         private static ComparisonForDrawing comparisonForDrawing;
+
+        public static event Action<int> KillAsteroid;
 
         /// <summary>
         /// Создаёт основные объекты игры
@@ -68,6 +71,7 @@ namespace StarTravel
                 if (i <= 2)
                 {
                     objsForGame[i] = new Star(StartPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
+                    if ((objsForGame[i] as Star).ID == 2) { KillAsteroid += (objsForGame[i] as Star).Game_KillAsteroid; }
                 }
                 else if (i >= 3 && i <= 6)
                 {
@@ -110,6 +114,9 @@ namespace StarTravel
             {
                 MessageBox.Show("Нравится, то что получается - нужно больше тренироваться...", "Game over");
             }
+            timer.Stop();
+            Buffer.Graphics.DrawString("The End", new Font(FontFamily.GenericSansSerif, 60, FontStyle.Underline), Brushes.White, 200, 100);
+            Buffer.Render();
         }
 
         /// <summary>
@@ -167,7 +174,7 @@ namespace StarTravel
 
             Load();
 
-            Timer timer = new Timer { Interval = 30 };
+            
             timer.Start();
             timer.Tick += Timer_Tick;
         }
@@ -201,22 +208,19 @@ namespace StarTravel
             {
                 foreach (IDraw obj in objsForGame)
                 {
-                    if (killAsteroids != 0 && (obj is BaseObject) && (obj as BaseObject).ID == 2)
-                    {
-                        (obj as BaseObject).Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
-                    }
                     if (obj is IUpdate)
                     {
                         (obj as IUpdate).Update();
-                        if (obj is ICollision && obj is IBoom 
+                        if (obj is ICollision 
                             && (obj as ICollision).KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject
-                            && (obj as IBoom).IsBoom == false)
+                            && (obj as IBoom)?.IsBoom == false)
                         {
                             if ((obj as ICollision).Collision(objsForGame))
                             {
                                 killAsteroids++;
+                                KillAsteroid?.Invoke(killAsteroids);
                                 System.Media.SystemSounds.Hand.Play();
-                                (obj as IBoom).CreatBoom(imageBoomList, 2);
+                                (obj as IBoom)?.CreatBoom(imageBoomList, 2);
                             }
                         }
                     }
