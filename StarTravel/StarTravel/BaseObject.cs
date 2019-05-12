@@ -173,8 +173,11 @@ namespace StarTravel
         {
             if (KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject && Closely == 0 && IsBoom == false)
             {
+                int currentShipEnergy = Game.Ship.Energy;
                 Random rand = new Random();
                 Game.Ship.EnergyLow(rand.Next(MaxSize.Width / 2, MaxSize.Width));
+                System.Media.SystemSounds.Asterisk.Play();
+                if (Game.Ship.Energy <= 0 && currentShipEnergy > 0) { Game.Ship.Die(); }
             }
             IsBoom = false;
             Boom = null;

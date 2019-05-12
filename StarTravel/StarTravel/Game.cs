@@ -85,6 +85,7 @@ namespace StarTravel
 
                 objsForGame[objsForGame.Length - 2] = new Bullet(new Point(), new Point(), new Size(), 0, 0, imageShip, StartPoint);
                 Ship = new Ship(imageShip, new Size(Width, Height));
+                Ship.MessageDie += Ship_MessageDie;
                 objsForGame[objsForGame.Length - 1] = Ship;
 
                 //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
@@ -95,6 +96,20 @@ namespace StarTravel
             //    _objs[i] = new Star(new Point(600, (i - (_objs.Length / 2)) * 20), new Point(i, 0), new Size(20, 20), i.ToString());
             
             comparisonForDrawing = new ComparisonForDrawing();
+        }
+
+        private static void Ship_MessageDie(object obj, string message)
+        {
+            DialogResult result = MessageBox.Show("Вы отважно сражались! Вам понравилась игра?", "Game over", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                MessageBox.Show(message, "Game over"); 
+            }
+            else if (result == DialogResult.No)
+            {
+                MessageBox.Show("Нравится, то что получается - нужно больше тренироваться...", "Game over");
+            }
         }
 
         /// <summary>

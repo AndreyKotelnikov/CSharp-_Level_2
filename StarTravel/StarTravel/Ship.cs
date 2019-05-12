@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StarTravel
 {
@@ -31,6 +32,13 @@ namespace StarTravel
             energy -= n;
         }
 
+        public delegate void EventMessage(object obj, string message);
+
+        public event EventMessage MessageDie;
+        //{
+        //    add { MessageDie += value; }
+        //    remove { MessageDie -= value; }
+        //}
 
         public Ship(Image image, Size size, Point? pos = null, int drawingPriority = 0, int closely = 0, 
             KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Ship)
@@ -61,6 +69,7 @@ namespace StarTravel
 
         public void Die()
         {
+            MessageDie?.Invoke(this, "Кораблик умер...");
         }
 
     }
