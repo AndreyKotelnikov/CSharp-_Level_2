@@ -114,10 +114,12 @@ namespace StarTravel
 
         private static void Ship_MessageDie(object obj, string message)
         {
-            form.KeyDown -= (objsForGame[objsForGame.Length - 2] as Bullet).Form_KeyDown;
-            form.KeyDown -= (objsForGame[objsForGame.Length - 3] as FrontSight).Form_KeyDown;
-            form.MouseClick -= (objsForGame[objsForGame.Length - 2] as Bullet).Form_MouseClick;
-            form.MouseMove -= (objsForGame[objsForGame.Length - 3] as FrontSight).Form_MouseMove;
+            //form.KeyDown -= (objsForGame[objsForGame.Length - 2] as Bullet).Form_KeyDown;
+            //form.KeyDown -= (objsForGame[objsForGame.Length - 3] as FrontSight).Form_KeyDown;
+            //form.MouseClick -= (objsForGame[objsForGame.Length - 2] as Bullet).Form_MouseClick;
+            //form.MouseMove -= (objsForGame[objsForGame.Length - 3] as FrontSight).Form_MouseMove;
+
+            Cursor.Show();
 
             DialogResult result = MessageBox.Show("Вы отважно сражались! Вам понравилась игра?", "Game over", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
