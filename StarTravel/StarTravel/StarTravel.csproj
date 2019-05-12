@@ -57,6 +57,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrontSight.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObjectException.cs" />
     <Compile Include="Helper.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="ISpaceMove.cs" />
     <Compile Include="IUpdate.cs" />
     <Compile Include="KindOfCollisionObject.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ship.cs" />

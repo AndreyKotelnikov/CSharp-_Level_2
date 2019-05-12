@@ -46,7 +46,7 @@ namespace StarTravel
 
         public override void NewStartPosition(int seedForRandom = 0, int delay = 0)
         {
-            Pos = Game.StartPoint;
+            Pos = Game.ScreenCenterPoint;
             Size = new Size(1, 1);
         }
 

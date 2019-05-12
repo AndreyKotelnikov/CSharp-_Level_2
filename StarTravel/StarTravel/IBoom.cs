@@ -12,5 +12,7 @@ namespace StarTravel
         bool IsBoom { get; }
         Boom Boom { get; }
         void CreatBoom(Image[] images, int timesOfRepeatEveryImage);
+        
+        event Action<string> Explode;
     }
 }

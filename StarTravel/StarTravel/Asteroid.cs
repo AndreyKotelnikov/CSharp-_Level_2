@@ -16,7 +16,7 @@ namespace StarTravel
         {
             FocusPoint = focusPoint;
             Boom = null;
-            Text = Closely.ToString();
+            Text = Closely == 0 ? "Летит в корабль" : "";
         }
         
         public override void Update()
@@ -60,9 +60,9 @@ namespace StarTravel
             MaxSize = new Size(size, size);
             if (delay == 0) { Delay = rand.Next(1, 100); } else { Delay = delay; }
             Closely = rand.Next(0, 3);
-            Text = Closely.ToString();
-            Dir = new Point(Game.StartPoint.X - Pos.X >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5),
-                Game.StartPoint.Y - Pos.Y >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5));
+            Text = Closely == 0 ? "Летит в корабль" : "";
+            Dir = new Point(Game.ScreenCenterPoint.X - Pos.X >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5),
+                Game.ScreenCenterPoint.Y - Pos.Y >= 0 ? rand.Next(1, 5) : -rand.Next(1, 5));
         }
     }
 }

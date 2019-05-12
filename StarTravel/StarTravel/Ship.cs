@@ -21,6 +21,8 @@ namespace StarTravel
 
         public Rectangle Rect { get { return new Rectangle(Pos, Size); } }
 
+        public int HeightOfCab { get; private set; }
+
         private Image image;
 
         private int energy = 100;
@@ -42,8 +44,8 @@ namespace StarTravel
         //    remove { MessageDie -= value; }
         //}
 
-        public Ship(Image image, Size size, Point? pos = null, int drawingPriority = 0, int closely = 0, 
-            KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Ship)
+        public Ship(Image image, Size size, Point? pos = null, int drawingPriority = 0, int closely = 10, 
+            KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Ship, int heightOfCab = 380)
         {
             Pos = pos?? new Point(0, 0);
             Size = size;
@@ -51,6 +53,7 @@ namespace StarTravel
             DrawingPriority = drawingPriority;
             Closely = closely;
             KindOfCollisionObject = kindOfCollisionObject;
+            HeightOfCab = heightOfCab;
         } 
 
         public void Draw()

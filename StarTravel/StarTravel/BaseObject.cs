@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StarTravel
 {
@@ -25,7 +26,9 @@ namespace StarTravel
         /// Текущий размер объекта
         /// </summary>
         private Size size;
-        
+
+        private bool isBoom;
+
         /// <summary>
         /// ID объекта
         /// </summary>
@@ -37,7 +40,15 @@ namespace StarTravel
         /// <summary>
         /// Объект взрывается сейчас?
         /// </summary>
-        public bool IsBoom { get; private set; }
+        public bool IsBoom
+        {
+            get => isBoom;
+            private set
+            {
+                if (isBoom == false && value == true) { Explode?.Invoke($"{GetType().Name} c ID = {ID} взорвался"); }
+                isBoom = value;
+            }
+        }
         /// <summary>
         /// Ссылка на объект взрыва
         /// </summary>
@@ -99,6 +110,8 @@ namespace StarTravel
         /// </summary>
         public virtual Rectangle Rect { get { return new Rectangle(Pos, Size); } }
 
+        public event Action<string> Explode;
+
         static BaseObject()
         {
             countID = 0;
@@ -117,7 +130,7 @@ namespace StarTravel
             DrawingPriority = drawingPriority;
             KindOfCollisionObject = kindOfCollisionObject;
             this.image = image;
-            FocusPoint = focusPoint?? Game.StartPoint;
+            FocusPoint = focusPoint?? Game.ScreenCenterPoint;
             Delay = delay;
             MaxSize = maxSize ?? new Size(20, 20);
             Text = text;
@@ -126,6 +139,11 @@ namespace StarTravel
         }
         public virtual void Draw()
         {
+            if (KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject && Closely == 0)
+            {
+                Pen pen = new Pen(Color.Red, 2);
+                Game.Buffer.Graphics.DrawEllipse(pen, Rect);
+            }
             if (Text != string.Empty)
             {
                 double offSet = 0.3;
@@ -143,8 +161,7 @@ namespace StarTravel
             foreach (var item in o)
             {
                 if ( item is ICollision && (item as ICollision).KindOfCollisionObject == KindOfCollisionObject.Weapon 
-                    //|| (item as ICollision).KindOfCollisionObject == KindOfCollisionObject.Ship)
-                    && (item as ICollision).Rect.IntersectsWith(Rect))
+                    && (item as ICollision).Rect.IntersectsWith(Rect) && (item as Bullet).TimeOfShooting > 0)
                 { return true; }
             }
             return false;
@@ -187,6 +204,8 @@ namespace StarTravel
         {
             Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
         }
+
+        
 
     }
 

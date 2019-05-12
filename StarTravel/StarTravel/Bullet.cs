@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StarTravel
 {
     class Bullet : BaseObject
     {
-        internal static Point LeftGun { get; private set; }
-        internal static Point RightGun { get; private set; }
+        private static Point LeftGun { get; set; }
+        private static Point RightGun { get; set; }
         public override Rectangle Rect { get { return new Rectangle(FocusPoint, Size); } }
+        public int TimeOfShooting { get; private set; }
+        private readonly int maxTimeOfShooting;
 
-        
+
 
         static Bullet()
         {
@@ -25,10 +28,11 @@ namespace StarTravel
 
         public Bullet(Point pos, Point dir, Size size, int closely, int delay, Image image, Point focusPoint, 
             KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Weapon, int drawingPriority = 1, 
-            Size? maxSize = null, string text = "")
+            Size? maxSize = null, string text = "", int maxTimeOfShooting = 5)
             : base(pos, dir, size, closely, drawingPriority, kindOfCollisionObject, image, focusPoint, delay, maxSize, text)
         {
-            
+            this.maxTimeOfShooting = maxTimeOfShooting;
+            TimeOfShooting = 0;
         }
 
         public override void Update()
@@ -40,6 +44,8 @@ namespace StarTravel
 
         public override void Draw()
         {
+            if (TimeOfShooting <= 0) { return; }
+            TimeOfShooting--;
             if (Delay != 0) { return; }
             //Game.Buffer.Graphics.DrawImage(image, pos.X, pos.Y, size.Width, size.Height);
             Pen pen = new Pen(Color.Red, 4);
@@ -56,6 +62,27 @@ namespace StarTravel
                     && (item as ICollision).Rect.IntersectsWith(Rect)) { return true; }
             }
             return false;
+        }
+
+        public void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                TimeOfShooting = maxTimeOfShooting;
+            }
+        }
+
+        public void FrontSight_ChangeFocusPoint(Point obj)
+        {
+            FocusPoint = obj;
+        }
+
+        internal void Form_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                TimeOfShooting = maxTimeOfShooting;
+            }
         }
     }
 }

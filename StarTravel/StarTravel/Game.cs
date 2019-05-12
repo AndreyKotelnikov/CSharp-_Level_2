@@ -20,7 +20,7 @@ namespace StarTravel
         // Ширина и высота игрового поля
         public static int Width { get; private set; }
         public static int Height { get; private set; }
-        public static Point StartPoint { get; private set; }
+        public static Point ScreenCenterPoint { get; private set; }
         public static Ship Ship { get; private set; }
         private static IDraw[] objsForGame;
         private static Image[] imageList;
@@ -29,6 +29,7 @@ namespace StarTravel
         private static Image imageShip;
         private static Form form;
         private static int killAsteroids;
+        private static Logger logger;
         private static ComparisonForDrawing comparisonForDrawing;
 
         public static event Action<int> KillAsteroid;
@@ -38,12 +39,13 @@ namespace StarTravel
         /// </summary>
         public static void Load()
         {
+            logger = new Logger();
             objsForGame = new IDraw[30];
             Random rand = new Random();
             int x = 1;
             int y = 1;
             int maxNumber = 10;
-            for (int i = 0; i < objsForGame.Length - 2; i++)
+            for (int i = 0; i < objsForGame.Length - 4; i++)
             {
                 switch (i % 4)
                 {
@@ -70,40 +72,53 @@ namespace StarTravel
                 else { y = y / Math.Abs(y); }
                 if (i <= 2)
                 {
-                    objsForGame[i] = new Star(StartPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
-                    if ((objsForGame[i] as Star).ID == 2) { KillAsteroid += (objsForGame[i] as Star).Game_KillAsteroid; }
+                    objsForGame[i] = new Star(ScreenCenterPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
+                    if ((objsForGame[i] as Star).ID == 1) { KillAsteroid += (objsForGame[i] as Star).Game_KillAsteroid; }
                 }
                 else if (i >= 3 && i <= 6)
                 {
-                    int XAst = (StartPoint.X + x * rand.Next(1, 100)) % Width;
-                    int YAst = (StartPoint.Y + y * rand.Next(1, 100)) % Height;
+                    int XAst = (ScreenCenterPoint.X + x * rand.Next(1, 100)) % Width;
+                    int YAst = (ScreenCenterPoint.Y + y * rand.Next(1, 100)) % Height;
 
-                    objsForGame[i] = new Asteroid(new Point(XAst, YAst), new Point(StartPoint.X - XAst >= 0 ? 1 : -1,
-                        StartPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
+                    objsForGame[i] = new Asteroid(new Point(XAst, YAst), new Point(ScreenCenterPoint.X - XAst >= 0 ? 1 : -1,
+                        ScreenCenterPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
                         rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), maxSize: new Size(20, 20));
                 }
                 else
                 {
-                    objsForGame[i] = new Star(StartPoint, new Point(x, y), new Size(1, 1), rand.Next(7, 11), rand.Next(10) * 10, imageList[rand.Next(3, 7)]);
+                    objsForGame[i] = new Star(ScreenCenterPoint, new Point(x, y), new Size(1, 1), rand.Next(7, 11), rand.Next(10) * 10, imageList[rand.Next(3, 7)]);
                 }
-
-                objsForGame[objsForGame.Length - 2] = new Bullet(new Point(), new Point(), new Size(), 0, 0, imageShip, StartPoint);
-                Ship = new Ship(imageShip, new Size(Width, Height));
-                Ship.MessageDie += Ship_MessageDie;
-                objsForGame[objsForGame.Length - 1] = Ship;
-
-                //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
+                if (objsForGame[i] is IBoom) { (objsForGame[i] as IBoom).Explode += logger.Game_Explode; }
             }
+            Ship = new Ship(imageShip, new Size(Width, Height));
+            Ship.MessageDie += Ship_MessageDie;
+            objsForGame[objsForGame.Length - 1] = Ship;
+            objsForGame[objsForGame.Length - 2] = new Bullet(new Point(), new Point(), new Size(), 0, 0, imageShip, ScreenCenterPoint);
+            form.KeyDown += (objsForGame[objsForGame.Length - 2] as Bullet).Form_KeyDown;
+            form.MouseClick += (objsForGame[objsForGame.Length - 2] as Bullet).Form_MouseClick;
+            objsForGame[objsForGame.Length - 3] = new FrontSight();
+            form.KeyDown += (objsForGame[objsForGame.Length - 3] as FrontSight).Form_KeyDown;
+            (objsForGame[objsForGame.Length - 3] as FrontSight).ChangeFocusPoint += (objsForGame[objsForGame.Length - 2] as Bullet).FrontSight_ChangeFocusPoint;
+            form.MouseMove += (objsForGame[objsForGame.Length - 3] as FrontSight).Form_MouseMove;
+            objsForGame[objsForGame.Length - 4] = logger;
+
+            //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
+
             //for (int i = 0; i < _objs.Length; i++)
             //    _objs[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20), i.ToString());
             //for (int i = _objs.Length / 2; i < _objs.Length; i++)
             //    _objs[i] = new Star(new Point(600, (i - (_objs.Length / 2)) * 20), new Point(i, 0), new Size(20, 20), i.ToString());
-            
+
             comparisonForDrawing = new ComparisonForDrawing();
         }
 
         private static void Ship_MessageDie(object obj, string message)
         {
+            form.KeyDown -= (objsForGame[objsForGame.Length - 2] as Bullet).Form_KeyDown;
+            form.KeyDown -= (objsForGame[objsForGame.Length - 3] as FrontSight).Form_KeyDown;
+            form.MouseClick -= (objsForGame[objsForGame.Length - 2] as Bullet).Form_MouseClick;
+            form.MouseMove -= (objsForGame[objsForGame.Length - 3] as FrontSight).Form_MouseMove;
+
             DialogResult result = MessageBox.Show("Вы отважно сражались! Вам понравилась игра?", "Game over", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -134,6 +149,7 @@ namespace StarTravel
         public static void Init(Form form)
         {
             Game.form = form;
+            
             // Графическое устройство для вывода графики            
             Graphics g;
             // Предоставляет доступ к главному буферу графического контекста для текущего приложения
@@ -148,7 +164,10 @@ namespace StarTravel
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
             
-            StartPoint = new Point(Width / 2, Height / 2);
+            Cursor.Hide();
+
+            ScreenCenterPoint = new Point(Width / 2, Height / 2);
+            
             // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
@@ -173,7 +192,6 @@ namespace StarTravel
             }
 
             Load();
-
             
             timer.Start();
             timer.Tick += Timer_Tick;
