@@ -213,7 +213,7 @@ namespace StarTravel
                         (obj as IUpdate).Update();
                         if (obj is ICollision 
                             && (obj as ICollision).KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject
-                            && (obj as IBoom)?.IsBoom == false)
+                            && (!(obj is IBoom) || (obj as IBoom)?.IsBoom == false))
                         {
                             if ((obj as ICollision).Collision(objsForGame))
                             {
