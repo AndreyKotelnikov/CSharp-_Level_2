@@ -18,31 +18,33 @@ namespace StarTravel
         static int width;
         static int height;
         static Point focusPoint;
-        static int count;
+        static int seedForRandom;
 
-        internal static void Update(ISpaceMove bObj)
+        internal static void Update(ISpaceMove sObj)
         {
-            focusPoint = bObj.FocusPoint;
+            focusPoint = sObj.FocusPoint;
 
-            if (bObj is Asteroid || bObj is Boom)
+            if ((sObj as ICollision)?.KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject 
+                || (sObj as ICollision)?.KindOfCollisionObject == KindOfCollisionObject.HealingSpaceObject
+                || sObj is Boom)
             {
-                DefineSpeedUpAsteroid(bObj);
-                UpdatePosition(bObj);
-                UpdateSizeAsteroid(bObj);
+                DefineSpeedUpAsteroid(sObj);
+                UpdatePosition(sObj);
+                UpdateSizeAsteroid(sObj);
             }
-            else if (bObj is Bullet)
+            else if ((sObj as ICollision)?.KindOfCollisionObject == KindOfCollisionObject.Weapon)
             {
-                DefineSpeedUp(bObj);
-                UpdatePosition(bObj);
-                UpdateSize(bObj);
+                DefineSpeedUp(sObj);
+                UpdatePosition(sObj);
+                UpdateSize(sObj);
             }
             else
             {
-                DefineSpeedUp(bObj);
-                UpdatePosition(bObj);
-                UpdateSize(bObj);
+                DefineSpeedUp(sObj);
+                UpdatePosition(sObj);
+                UpdateSize(sObj);
             }
-            CheckingOutOfScreen(bObj);
+            CheckingOutOfScreen(sObj);
             //bObj.Text = speedUp.ToString();
         }
 
@@ -65,8 +67,8 @@ namespace StarTravel
         {
             if (bObj.Pos.X + width < 0 || bObj.Pos.X - width > Game.Width || bObj.Pos.Y + height < 0 || bObj.Pos.Y - height > Game.Height)
             {
-               count++;
-               bObj.NewStartPosition(count, 0);
+               seedForRandom++;
+               bObj.NewStartPosition(seedForRandom, 0);
             }
         }
 

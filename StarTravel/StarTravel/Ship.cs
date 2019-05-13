@@ -60,7 +60,7 @@ namespace StarTravel
         //}
 
         public Ship(Image image, Size size, Point? pos = null, int drawingPriority = 0, int closely = 10, 
-            KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Ship, int heightOfCab = 380, int maxEnergy = 10)
+            KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Ship, int heightOfCab = 380, int maxEnergy = 100)
         {
             Pos = pos?? new Point(0, 0);
             Size = size;

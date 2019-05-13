@@ -12,7 +12,7 @@ namespace StarTravel
     {
         private static Queue<LogEventArgs> logList;
 
-        public Logger(bool writeToFile = false)
+        public Logger(bool writeToFile = true)
         {
             logList = new Queue<LogEventArgs>();
             WriteLogsToFile = writeToFile;

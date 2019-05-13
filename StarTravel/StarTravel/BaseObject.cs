@@ -114,7 +114,7 @@ namespace StarTravel
         /// <summary>
         /// Площадь объекта на форме
         /// </summary>
-        public virtual Rectangle Rect { get { return new Rectangle(Pos, Size); } }
+        public virtual Rectangle Rect { get { return new Rectangle(new Point(Pos.X - Size.Width/2, Pos.Y - Size.Height/2), Size); } }
 
         public event EventHandler<LogEventArgs> Logging;
 
@@ -155,7 +155,7 @@ namespace StarTravel
                 double offSet = 0.3;
                 Font font = new Font("Verdana", (int)(Size.Width * offSet) >= 1 ? (int)(Size.Width * offSet) : 1);
                 SolidBrush myBrush = new SolidBrush(Color.White);
-                Game.Buffer.Graphics.DrawString(Text, font, myBrush, Pos.X, Pos.Y + (int)(Size.Height * (1 - offSet)));
+                Game.Buffer.Graphics.DrawString(Text, font, myBrush, Pos.X - Size.Width/2, Pos.Y - Size.Height/2 + (int)(Size.Height * (1 - offSet)));
             }
         }
         

@@ -31,7 +31,7 @@ namespace StarTravel
 
         public override string ToString()
         {
-            return $"{Sender?.GetType().Name} {Message} {(Number == 0 ? "" : Number.ToString())} {ObjectToModifiedInMethod?.GetType().Name}";
+            return $"{Sender?.GetType().Name} {Message} {(Number == 0 ? "" : Number.ToString())}";
         }
     }
 }

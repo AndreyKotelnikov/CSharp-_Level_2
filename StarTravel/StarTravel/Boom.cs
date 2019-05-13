@@ -34,8 +34,11 @@ namespace StarTravel
 
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(images[IndexImage], Pos.X, Pos.Y, 
-                Size.Width + Size.Width * (IndexImage + 1) / 10, Size.Height + Size.Height * (IndexImage + 1) / 10);
+            int width = Size.Width + Size.Width * (IndexImage + 1) / 10;
+            int height = Size.Height + Size.Height * (IndexImage + 1) / 10;
+
+            Game.Buffer.Graphics.DrawImage(images[IndexImage], Pos.X - width/2, Pos.Y - height/2, 
+                width , height);
             if (IndexImage < images.Length - 1)
             {
                 repeat++;

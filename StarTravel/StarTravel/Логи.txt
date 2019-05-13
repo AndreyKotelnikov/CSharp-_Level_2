@@ -1,0 +1,330 @@
+14.05.2019 0:05:39: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:05:40: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:05:42: Asteroid нанёс урон 3 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:05:43: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:05:47: Asteroid нанёс урон 10 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:05:50: Asteroid нанёс урон 4 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:05:52: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:05:58: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:05:59: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:06:00: Asteroid нанёс урон 2 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:06:01: Asteroid нанёс урон 17 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:06:06: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:06:08: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:06:08: Asteroid нанёс урон 2 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:06:11: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:12: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:06:14: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:15: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:17: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:22: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:06:22: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:23: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:27: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:29: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:06:32: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:06:41: Asteroid нанёс урон 18 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:06:44: Asteroid нанёс урон 9 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:06:51: Asteroid нанёс урон 15 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:06:56: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:57: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:06:57: Asteroid нанёс урон 8 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:06:57: Asteroid нанёс урон 1 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:06:59: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:07:02: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:07:03: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:07:08: Asteroid нанёс урон 7 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:07:08: Asteroid нанёс урон 3 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:07:09: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:07:10: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:07:11: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:07:12: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:07:14: FirstAidKit вылечила жизни на 7 Ship FirstAidKit  IsBoom 1 
+14.05.2019 0:07:18: Asteroid нанёс урон 16 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:07:18: Asteroid нанёс урон 22 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:12:39: FirstAidKit вылечила жизни на 18 Ship FirstAidKit  IsBoom 2 
+14.05.2019 0:12:40: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:12:41: Asteroid нанёс урон 2 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:12:42: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:12:45: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:12:47: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:12:49: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:12:50: FirstAidKit вылечила жизни на 5 Ship FirstAidKit  IsBoom 2 
+14.05.2019 0:12:51: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:12:54: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:12:56: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:12:57: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:13:01: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:13:05: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:13:06: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:13:07: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:13:08: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:15:58: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:15:58: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:02: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:04: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:04: Asteroid нанёс урон 14 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:16:04: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:07: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:08: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:12: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:14: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:15: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:17: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:19: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:22: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:24: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:25: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:27: Asteroid нанёс урон 1 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:16:28: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:30: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:32: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:33: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:35: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:37: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:38: FirstAidKit вылечила жизни на 13 Ship FirstAidKit  IsBoom 2 
+14.05.2019 0:16:39: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:40: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:43: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:45: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:46: Asteroid нанёс урон 3 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:16:46: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:16:48: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:49: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:52: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:52: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:55: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:16:57: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:16:59: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:17:01: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:17:04: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:17:06: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:17:08: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:17:10: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:17:11: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:17:11: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:17:15: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:17:16: FirstAidKit вылечила жизни на 5 Ship FirstAidKit  IsBoom 2 
+14.05.2019 0:17:17: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:17:20: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:17:21: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:17:22: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:17:23: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:17:27: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:17:28: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:17:29: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:17:30: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:21:00: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:00: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:03: FirstAidKit вылечила жизни на 14 Ship FirstAidKit  IsBoom 2 
+14.05.2019 0:21:04: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:21:05: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:21:06: Asteroid нанёс урон 4 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:21:06: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:07: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:21:09: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:21:11: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:21:13: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:14: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:21:17: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:21:19: FirstAidKit вылечила жизни на 8 Ship FirstAidKit  IsBoom 2 
+14.05.2019 0:21:22: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:21:22: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:23: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:26: Asteroid нанёс урон 4 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:21:27: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:32: Asteroid нанёс урон 12 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:21:33: FirstAidKit вылечила жизни на 10 Ship FirstAidKit  IsBoom 2 
+14.05.2019 0:21:39: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:21:41: Asteroid нанёс урон 19 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:21:42: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:44: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:47: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:21:48: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:21:49: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:21:50: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:21:53: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:21:56: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:21:59: Asteroid нанёс урон 6 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:22:01: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:22:05: Asteroid нанёс урон 4 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:22:06: Asteroid нанёс урон 14 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:22:06: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:22:08: Asteroid нанёс урон 8 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:22:10: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:22:10: Asteroid нанёс урон 1 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:22:13: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:22:15: FirstAidKit вылечила жизни на 9 Ship FirstAidKit  IsBoom 6 
+14.05.2019 0:22:20: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:22:20: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:22:25: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:22:28: Asteroid нанёс урон 2 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:22:30: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:22:31: FirstAidKit вылечила жизни на 9 Ship FirstAidKit  IsBoom 1 
+14.05.2019 0:22:32: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:22:34: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:22:36: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:22:38: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:22:40: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:22:43: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:22:43: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:22:46: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:22:47: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:22:48: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:22:49: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:22:52: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:22:54: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:22:55: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:22:56: Asteroid нанёс урон 4 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:22:59: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:00: Asteroid нанёс урон  Ship Asteroid NewStartPosition  0 
+14.05.2019 0:23:02: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:23:03: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:04: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:05: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:08: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:23:11: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:11: Asteroid нанёс урон 4 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:23:12: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:13: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:13: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:18: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:23:21: Asteroid нанёс урон 15 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:23:22: FirstAidKit вылечила жизни на 12 Ship FirstAidKit  IsBoom 2 
+14.05.2019 0:23:23: Asteroid нанёс урон  Ship Asteroid NewStartPosition  0 
+14.05.2019 0:23:26: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:26: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:23:28: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:30: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:30: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:32: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:36: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:38: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:39: FirstAidKit вылечила жизни на 6 Ship FirstAidKit  IsBoom 1 
+14.05.2019 0:23:42: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:23:43: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:50: Asteroid нанёс урон 23 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:23:53: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:23:53: Asteroid нанёс урон 1 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:23:54: Asteroid нанёс урон 1 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:23:57: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:01: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:24:04: Asteroid нанёс урон  Ship Asteroid NewStartPosition  0 
+14.05.2019 0:24:05: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:06: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:24:08: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:09: FirstAidKit вылечила жизни на 3 Ship FirstAidKit  IsBoom 1 
+14.05.2019 0:24:11: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:13: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:18: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:19: Asteroid нанёс урон 1 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:24:19: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:24:22: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:24:24: Asteroid нанёс урон 2 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:24:25: FirstAidKit вылечила жизни на 14 Ship FirstAidKit  IsBoom 1 
+14.05.2019 0:24:27: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:29: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:24:31: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:24:31: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:36: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:36: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:24:37: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:38: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:41: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:24:42: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:42: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:45: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:49: Asteroid нанёс урон 12 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:24:49: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:53: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:54: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:24:57: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:24:59: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:25:00: Asteroid нанёс урон 9 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:25:04: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:06: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:25:07: Asteroid нанёс урон 1 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:25:08: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:09: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:25:12: FirstAidKit вылечила жизни на 7 Ship FirstAidKit  IsBoom 1 
+14.05.2019 0:25:14: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:25:16: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:16: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:25:19: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:21: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:25:21: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:22: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:30: Asteroid нанёс урон 2 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:25:31: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:25:32: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:33: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:35: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:35: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:37: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:25:40: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:41: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:42: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:25:43: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:25:45: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:25:47: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:25:48: Asteroid нанёс урон 4 Ship Asteroid NewStartPosition  0 
+14.05.2019 0:25:51: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:25:52: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:25:53: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:25:55: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:25:56: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:25:58: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:26:01: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:26:03: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:26:04: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:26:06: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:26:10: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:26:10: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:26:11: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:26:12: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:26:15: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:26:16: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:26:17: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:26:19: Asteroid взорвался   Asteroid  IsBoom 1 
+14.05.2019 0:26:20: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:26:22: Asteroid взорвался   Asteroid  IsBoom 2 
+14.05.2019 0:26:24: Asteroid взорвался   Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:23: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:28:23: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:28:24: FirstAidKit вылечила жизни на 13 FirstAidKit  IsBoom 2 
+14.05.2019 0:28:28: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:28:29: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:28:29: Asteroid взорвался  Asteroid  IsBoom 1 
+14.05.2019 0:28:30: Asteroid нанёс урон 2 Asteroid NewStartPosition  0 
+14.05.2019 0:28:34: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:36: Asteroid взорвался  Asteroid  IsBoom 1 
+14.05.2019 0:28:39: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:39: Asteroid взорвался  Asteroid  IsBoom 1 
+14.05.2019 0:28:41: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:44: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:47: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:48: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:28:49: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:28:51: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:54: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:55: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:28:55: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:28:58: FirstAidKit вылечила жизни на 6 FirstAidKit  IsBoom 2 
+14.05.2019 0:28:59: Asteroid взорвался  Asteroid  IsBoom 1 
+14.05.2019 0:29:05: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:29:05: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:29:08: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:29:11: Asteroid нанёс урон 2 Asteroid NewStartPosition  0 
+14.05.2019 0:29:11: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:29:16: Asteroid взорвался  Asteroid  IsBoom 1 
+14.05.2019 0:29:17: Asteroid нанёс урон 12 Asteroid NewStartPosition  0 
+14.05.2019 0:29:17: Asteroid нанёс урон 7 Asteroid NewStartPosition  0 
+14.05.2019 0:29:17: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:29:19: Asteroid взорвался  Asteroid  IsBoom 1 
+14.05.2019 0:29:21: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:29:23: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:29:25: Asteroid взорвался  Asteroid  IsBoom 0 Убит опасный Asteroid
+14.05.2019 0:29:26: FirstAidKit вылечила жизни на 15 FirstAidKit  IsBoom 7 
+14.05.2019 0:29:29: Asteroid взорвался  Asteroid  IsBoom 1 
+14.05.2019 0:29:30: Asteroid взорвался  Asteroid  IsBoom 2 
+14.05.2019 0:29:33: Asteroid взорвался  Asteroid  IsBoom 1 

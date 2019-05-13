@@ -43,7 +43,7 @@ namespace StarTravel
             else
             {
                 if (Delay != 0) { return; }
-                Game.Buffer.Graphics.DrawImage(image, Pos.X, Pos.Y, Size.Width, Size.Height);
+                Game.Buffer.Graphics.DrawImage(image, Pos.X - Size.Width/2, Pos.Y - Size.Height/2, Size.Width, Size.Height);
                 base.Draw();
             }
         }

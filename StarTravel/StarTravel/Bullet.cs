@@ -12,7 +12,7 @@ namespace StarTravel
     {
         private static Point LeftGun { get; set; }
         private static Point RightGun { get; set; }
-        public override Rectangle Rect { get { return new Rectangle(FocusPoint, Size); } }
+        public override Rectangle Rect { get { return new Rectangle(new Point(FocusPoint.X - Size.Width/2, FocusPoint.Y - Size.Height/2), Size); } }
         public int TimeOfShooting { get; private set; }
         private readonly int maxTimeOfShooting;
 
