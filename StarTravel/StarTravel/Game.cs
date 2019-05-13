@@ -15,7 +15,7 @@ namespace StarTravel
     {
         private static Timer timer = new Timer { Interval = 30 };
         private static BufferedGraphicsContext _context;
-        public static BufferedGraphics Buffer;
+        public static BufferedGraphics Buffer { get; private set; }
         // Свойства
         // Ширина и высота игрового поля
         public static int Width { get; private set; }
@@ -124,6 +124,7 @@ namespace StarTravel
 
         private static void Ship_MessageDie(object obj, string message)
         {
+            // !!! Выходит ошибка - this равно null - пока не знаю почему.
             //form.KeyDown -= (objsForGame[objsForGame.Length - 2] as Bullet).Form_KeyDown;
             //form.KeyDown -= (objsForGame[objsForGame.Length - 3] as FrontSight).Form_KeyDown;
             //form.MouseClick -= (objsForGame[objsForGame.Length - 2] as Bullet).Form_MouseClick;
@@ -243,18 +244,27 @@ namespace StarTravel
                     if (obj is IUpdate)
                     {
                         (obj as IUpdate).Update();
-                        if (obj is ICollision 
-                            && (obj as ICollision).KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject
-                            && (!(obj is IBoom) || (obj as IBoom)?.IsBoom == false))
+                        if (obj is ICollision && (!(obj is IBoom) || (obj as IBoom)?.IsBoom == false))
                         {
-                            if ((obj as ICollision).Collision(objsForGame))
+                            if ((obj as ICollision).KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject)
                             {
-                                killAsteroids++;
-                                KillAsteroid?.Invoke(killAsteroids);
-                                System.Media.SystemSounds.Hand.Play();
-                                (obj as IBoom)?.CreatBoom(imageBoomList, 2);
+                                if ((obj as ICollision).Collision(objsForGame))
+                                {
+                                    killAsteroids++;
+                                    KillAsteroid?.Invoke(killAsteroids);
+                                    System.Media.SystemSounds.Hand.Play();
+                                    (obj as IBoom)?.CreatBoom(imageBoomList, 2);
+                                }
                             }
-                        }
+                            else if ((obj as ICollision).KindOfCollisionObject == KindOfCollisionObject.HealingSpaceObject)
+                            {
+                                if ((obj as ICollision).Collision(objsForGame))
+                                {
+                                    System.Media.SystemSounds.Beep.Play();
+                                    (obj as IBoom)?.CreatBoom(imageBoomList, 2);
+                                }
+                            }
+                        } 
                     }
                 }
             }

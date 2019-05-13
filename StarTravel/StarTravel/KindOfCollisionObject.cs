@@ -8,6 +8,6 @@ namespace StarTravel
 {
     public enum KindOfCollisionObject
     {
-        Weapon, DamageSpaceObject, NoDamageSpaceObject, Ship
+        Weapon, DamageSpaceObject, NoDamageSpaceObject, Ship, HealingSpaceObject
     }
 }

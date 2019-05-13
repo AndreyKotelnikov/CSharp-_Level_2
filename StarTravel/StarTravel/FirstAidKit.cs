@@ -28,7 +28,7 @@ namespace StarTravel
         }
 
         public FirstAidKit(Point pos, Point dir, Size size, int closely, int delay, Image image,
-            Point focusPoint, KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.DamageSpaceObject,
+            Point focusPoint, KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.HealingSpaceObject,
             int drawingPriority = 5, Size? maxSize = null, string text = "") : base(pos, dir, size, closely, delay, image,
              focusPoint, kindOfCollisionObject, drawingPriority, maxSize, text)
         {
