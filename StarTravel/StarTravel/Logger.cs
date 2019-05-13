@@ -40,10 +40,10 @@ namespace StarTravel
 
         public void Draw()
         {
-            int x = Game.Width - 200;
+            int x = Game.Width - 300;
             int y = Game.Height - 100;
 
-            Game.Buffer.Graphics.FillRectangle(Brushes.White, x, y, 200, 90);
+            Game.Buffer.Graphics.FillRectangle(Brushes.White, x, y, 280, 90);
 
             LogEventArgs[] arr = logList.ToArray();
             Array.Reverse(arr);
@@ -55,13 +55,13 @@ namespace StarTravel
                 brush = defaultBrush;
                 if (item.SenderPropertyInfo?.Name == "IsBoom")
                 {
-                    if (item.Text != string.Empty) { brush = Brushes.Violet; }
+                    if (item.Sender.GetType().Name == "FirstAidKit") { brush = Brushes.Green; }
+                    else if (item.Text != string.Empty) { brush = Brushes.Violet; }
                     else brush = Brushes.DarkBlue;
                 }
                 else if (item.SenderMethodInfo?.Name == "NewStartPosition" && item.ObjectToModifiedInMethod?.GetType().Name == "Ship")
                 { brush = Brushes.Red; }
 
-                
                 Game.Buffer.Graphics.DrawString(item.Text == string.Empty ? item.ToString() : item.Text, font, brush, x, y);
                 y += 15;
             }

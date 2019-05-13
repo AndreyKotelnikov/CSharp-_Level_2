@@ -51,6 +51,7 @@
     <Compile Include="Boom.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="ComparisonForDrawing.cs" />
+    <Compile Include="FirstAidKit.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

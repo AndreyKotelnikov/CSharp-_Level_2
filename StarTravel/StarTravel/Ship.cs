@@ -25,14 +25,16 @@ namespace StarTravel
 
         private Image image;
 
-        private int energy = 100;
+        private int maxEnergy;
+
+        private int energy;
 
         public int Energy
         {
             get => energy;
-            set
+            private set
             {
-                if (value <= 0 && energy > 0) { Die(); }
+                if (value <= 0 && energy > 0) { energy = value; Die(); }
                 energy = value;
             }
         }
@@ -40,6 +42,11 @@ namespace StarTravel
         public void EnergyLow(int n)
         {
             Energy -= n;
+        }
+
+        public void EnergyUp(int n)
+        {
+            Energy = Energy + n > maxEnergy ? maxEnergy : Energy + n;
         }
 
         public delegate void EventMessage(object obj, string message);
@@ -53,7 +60,7 @@ namespace StarTravel
         //}
 
         public Ship(Image image, Size size, Point? pos = null, int drawingPriority = 0, int closely = 10, 
-            KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Ship, int heightOfCab = 380)
+            KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.Ship, int heightOfCab = 380, int maxEnergy = 10)
         {
             Pos = pos?? new Point(0, 0);
             Size = size;
@@ -62,6 +69,8 @@ namespace StarTravel
             Closely = closely;
             KindOfCollisionObject = kindOfCollisionObject;
             HeightOfCab = heightOfCab;
+            this.maxEnergy = maxEnergy;
+            energy = maxEnergy;
         } 
 
         public void Draw()

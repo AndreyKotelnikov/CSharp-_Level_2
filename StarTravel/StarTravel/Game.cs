@@ -45,7 +45,7 @@ namespace StarTravel
             int x = 1;
             int y = 1;
             int maxNumber = 10;
-            for (int i = 0; i < objsForGame.Length - 4; i++)
+            for (int i = 0; i < objsForGame.Length - 5; i++)
             {
                 switch (i % 4)
                 {
@@ -75,14 +75,23 @@ namespace StarTravel
                     objsForGame[i] = new Star(ScreenCenterPoint, new Point(x, y), new Size(1, 1), rand.Next(0, 3), rand.Next(10) * 10, imageList[i]);
                     if ((objsForGame[i] as Star).ID == 1) { KillAsteroid += (objsForGame[i] as Star).Game_KillAsteroid; }
                 }
-                else if (i >= 3 && i <= 6)
+                else if (i >= 3 && i <= 7)
                 {
                     int XAst = (ScreenCenterPoint.X + x * rand.Next(1, 100)) % Width;
                     int YAst = (ScreenCenterPoint.Y + y * rand.Next(1, 100)) % Height;
 
-                    objsForGame[i] = new Asteroid(new Point(XAst, YAst), new Point(ScreenCenterPoint.X - XAst >= 0 ? 1 : -1,
+                    if (i == 7)
+                    {
+                        objsForGame[i] = new FirstAidKit(new Point(XAst, YAst), new Point(ScreenCenterPoint.X - XAst >= 0 ? 1 : -1,
+                        ScreenCenterPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
+                        rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), maxSize: new Size(10, 10));
+                    }
+                    else
+                    {
+                        objsForGame[i] = new Asteroid(new Point(XAst, YAst), new Point(ScreenCenterPoint.X - XAst >= 0 ? 1 : -1,
                         ScreenCenterPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
                         rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), maxSize: new Size(20, 20));
+                    }
                 }
                 else
                 {
@@ -101,6 +110,7 @@ namespace StarTravel
             (objsForGame[objsForGame.Length - 3] as FrontSight).ChangeFocusPoint += (objsForGame[objsForGame.Length - 2] as Bullet).FrontSight_ChangeFocusPoint;
             form.MouseMove += (objsForGame[objsForGame.Length - 3] as FrontSight).Form_MouseMove;
             objsForGame[objsForGame.Length - 4] = logger;
+            objsForGame[objsForGame.Length - 5] = logger;
 
             //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
 
@@ -132,7 +142,8 @@ namespace StarTravel
                 MessageBox.Show("Нравится, то что получается - нужно больше тренироваться...", "Game over");
             }
             timer.Stop();
-            Buffer.Graphics.DrawString("The End", new Font(FontFamily.GenericSansSerif, 60, FontStyle.Underline), Brushes.White, 200, 100);
+            Buffer.Graphics.DrawString("The End", new Font(FontFamily.GenericSansSerif, 60, FontStyle.Underline), 
+                Brushes.Yellow, ScreenCenterPoint.X - 150, ScreenCenterPoint.Y - 130);
             Buffer.Render();
         }
 
@@ -173,7 +184,7 @@ namespace StarTravel
             // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
-            imageList = new Image[11];
+            imageList = new Image[12];
             imageList[0] = Image.FromFile(@"..\..\Звезда1.png");
             imageList[1] = Image.FromFile(@"..\..\Звезда2.png");
             imageList[2] = Image.FromFile(@"..\..\Звезда3.png");
@@ -185,6 +196,7 @@ namespace StarTravel
             imageList[8] = Image.FromFile(@"..\..\Астероид2.png");
             imageList[9] = Image.FromFile(@"..\..\Астероид3.png");
             imageList[10] = Image.FromFile(@"..\..\Астероид4.png");
+            imageList[11] = Image.FromFile(@"..\..\Аптечка.png");
             imageBackGround = Image.FromFile(@"..\..\Звёздное небо.png");
             imageShip = Image.FromFile(@"..\..\Корабль.png");
             imageBoomList = new Image[12];

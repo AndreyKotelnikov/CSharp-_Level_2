@@ -29,7 +29,7 @@ namespace StarTravel
         /// </summary>
         private Size size;
 
-        private bool isBoom;
+        protected bool isBoom;
 
         /// <summary>
         /// ID объекта
@@ -42,10 +42,10 @@ namespace StarTravel
         /// <summary>
         /// Объект взрывается сейчас?
         /// </summary>
-        public bool IsBoom
+        public virtual bool IsBoom
         {
             get => isBoom;
-            private set
+            protected set
             {
                 if (isBoom == false && value == true)
                 {
@@ -213,6 +213,10 @@ namespace StarTravel
             Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
         }
 
+        protected void StartLogginEvent(Object o, LogEventArgs logEvent)
+        {
+            Logging?.Invoke(0, logEvent);
+        }
         
 
     }
