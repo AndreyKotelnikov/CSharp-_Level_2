@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,8 +12,9 @@ namespace StarTravel
     /// <summary>
     /// Базовый абстрактный класс для космических объектов
     /// </summary>
-    abstract class BaseObject: ICollision, ISpaceMove, IDraw, IUpdate, IBoom
+    abstract class BaseObject: ICollision, ISpaceMove, IDraw, IUpdate, IBoom, ILog
     {
+        protected static int seedForRandom = 0;
         /// <summary>
         /// ID объекта
         /// </summary>
@@ -45,7 +47,11 @@ namespace StarTravel
             get => isBoom;
             private set
             {
-                if (isBoom == false && value == true) { Explode?.Invoke($"{GetType().Name} c ID = {ID} взорвался"); }
+                if (isBoom == false && value == true)
+                {
+                    LogEventArgs e = new LogEventArgs(this, null, GetType().GetProperty("IsBoom"), message: "взорвался");
+                    Logging?.Invoke(this, e);
+                }
                 isBoom = value;
             }
         }
@@ -110,7 +116,7 @@ namespace StarTravel
         /// </summary>
         public virtual Rectangle Rect { get { return new Rectangle(Pos, Size); } }
 
-        public event Action<string> Explode;
+        public event EventHandler<LogEventArgs> Logging;
 
         static BaseObject()
         {
@@ -190,11 +196,13 @@ namespace StarTravel
         {
             if (KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject && Closely == 0 && IsBoom == false)
             {
-                int currentShipEnergy = Game.Ship.Energy;
                 Random rand = new Random();
-                Game.Ship.EnergyLow(rand.Next(MaxSize.Width / 2, MaxSize.Width));
+                int damage = rand.Next(MaxSize.Width / 2, MaxSize.Width);
+                LogEventArgs logEvent = new LogEventArgs(this, GetType().GetMethod("NewStartPosition"), null, Game.Ship, damage, "нанёс урон");
+                Logging?.Invoke(this, logEvent);
+                Game.Ship.EnergyLow(damage);
                 System.Media.SystemSounds.Asterisk.Play();
-                if (Game.Ship.Energy <= 0 && currentShipEnergy > 0) { Game.Ship.Die(); }
+                
             }
             IsBoom = false;
             Boom = null;

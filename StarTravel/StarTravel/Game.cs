@@ -88,7 +88,7 @@ namespace StarTravel
                 {
                     objsForGame[i] = new Star(ScreenCenterPoint, new Point(x, y), new Size(1, 1), rand.Next(7, 11), rand.Next(10) * 10, imageList[rand.Next(3, 7)]);
                 }
-                if (objsForGame[i] is IBoom) { (objsForGame[i] as IBoom).Explode += logger.Game_Explode; }
+                if (objsForGame[i] is ILog) { (objsForGame[i] as ILog).Logging += logger.LoggingEvent; }
             }
             Ship = new Ship(imageShip, new Size(Width, Height));
             Ship.MessageDie += Ship_MessageDie;

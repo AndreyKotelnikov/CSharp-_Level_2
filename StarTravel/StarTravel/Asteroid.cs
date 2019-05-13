@@ -25,7 +25,8 @@ namespace StarTravel
             {
                 if (Boom.EndBoom)
                 {
-                    NewStartPosition(0, 100);
+                    NewStartPosition(seedForRandom, 100);
+                    seedForRandom++;
                 }
                 else { Boom.Update(); }
             }

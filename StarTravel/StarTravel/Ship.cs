@@ -27,11 +27,19 @@ namespace StarTravel
 
         private int energy = 100;
 
-        public int Energy => energy;
+        public int Energy
+        {
+            get => energy;
+            set
+            {
+                if (value <= 0 && energy > 0) { Die(); }
+                energy = value;
+            }
+        }
 
         public void EnergyLow(int n)
         {
-            energy -= n;
+            Energy -= n;
         }
 
         public delegate void EventMessage(object obj, string message);

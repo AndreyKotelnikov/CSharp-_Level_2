@@ -64,9 +64,11 @@
     <Compile Include="IBoom.cs" />
     <Compile Include="ICollision.cs" />
     <Compile Include="IDraw.cs" />
+    <Compile Include="ILog.cs" />
     <Compile Include="ISpaceMove.cs" />
     <Compile Include="IUpdate.cs" />
     <Compile Include="KindOfCollisionObject.cs" />
+    <Compile Include="LogEventArgs.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
