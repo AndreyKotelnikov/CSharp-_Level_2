@@ -9,20 +9,38 @@ using System.Windows.Forms;
 
 namespace StarTravel
 {
+    /// <summary>
+    /// Прицел
+    /// </summary>
     class FrontSight : IDraw
     {
+        /// <summary>
+        /// Приоритет для отрисовки: 0 - отрисовывается последним, 1 - предпоследним и т.д.
+        /// </summary>
         public int DrawingPriority { get; private set; }
-
+        /// <summary>
+        /// Близость траектории движения объекта к кораблю (0 - очень близко, 10 - очень далеко)
+        /// </summary>
         public int Closely { get; private set; }
-
+        /// <summary>
+        /// Текущий размер объекта
+        /// </summary>
         public Size Size { get; private set; }
-
+        /// <summary>
+        /// Текущий размер центрального перекрестия
+        /// </summary>
         public int SizeOfCross { get; private set; }
-
+        /// <summary>
+        /// Ограничительная зона передвижения прицела
+        /// </summary>
         public Rectangle RestrictedZone { get; private set; }
-
+        /// <summary>
+        /// Центр прицела
+        /// </summary>
         private Point focusPoint;
-
+        /// <summary>
+        /// Центр прицела
+        /// </summary>
         public Point FocusPoint
         {
             get => focusPoint;
@@ -32,11 +50,26 @@ namespace StarTravel
                 ChangeFocusPoint?.Invoke(focusPoint);
             }
         }
-
+        /// <summary>
+        /// Скорость перемещения прицела при нажатии клавиш клавиатуры
+        /// </summary>
         private int moveSpeed;
 
+        /// <summary>
+        /// Событие, которое активируется при изменении координат центра прицела
+        /// </summary>
         public event Action<Point> ChangeFocusPoint;
 
+        /// <summary>
+        /// Конструктор для экземпляра класса
+        /// </summary>
+        /// <param name="drawingPriority"></param>
+        /// <param name="closely"></param>
+        /// <param name="size"></param>
+        /// <param name="sizeOfCross"></param>
+        /// <param name="restrictedZone"></param>
+        /// <param name="focusPoint"></param>
+        /// <param name="moveSpeed"></param>
         public FrontSight(int drawingPriority = 2, int closely = 0, Size? size = null, int sizeOfCross = 20, 
             Rectangle ? restrictedZone = null, Point? focusPoint = null, int moveSpeed = 20)
         {
@@ -49,6 +82,9 @@ namespace StarTravel
             this.moveSpeed = moveSpeed;
         }
 
+        /// <summary>
+        /// Отрисовывает объект на форме
+        /// </summary>
         public void Draw()
         {
             Pen pen = new Pen(Color.BlueViolet, 2);
@@ -58,6 +94,11 @@ namespace StarTravel
                 Size.Width, Size.Height);
         }
 
+        /// <summary>
+        /// Обработчик события при нажатии клавишы на клавиатуре
+        /// </summary>
+        /// <param name="sender">Отправитель события</param>
+        /// <param name="e">Данные о нажатой клавише</param>
         public void Form_KeyDown(object sender, KeyEventArgs e)
         {
             int x = FocusPoint.X;
@@ -86,6 +127,11 @@ namespace StarTravel
 
         }
 
+        /// <summary>
+        /// Обработчик события о передвижении мыши
+        /// </summary>
+        /// <param name="sender">Отправитель события</param>
+        /// <param name="e">Данные о событии мыши</param>
         public void Form_MouseMove(object sender, EventArgs e)
         {
             if (RestrictedZone.Contains((e as MouseEventArgs).X, (e as MouseEventArgs).Y))

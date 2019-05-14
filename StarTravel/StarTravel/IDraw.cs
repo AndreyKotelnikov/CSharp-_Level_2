@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace StarTravel
 {
+    /// <summary>
+    /// Интерфейс для отрисовки объектов
+    /// </summary>
     interface IDraw
     {
         /// <summary>

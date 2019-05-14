@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace StarTravel
 {
+    /// <summary>
+    /// Аптечка первой помощи
+    /// </summary>
     class FirstAidKit : Asteroid
     {
+        /// <summary>
+        /// Переопределённое свойство "Объект взорвался?"
+        /// </summary>
         public override bool IsBoom
         {
             get => isBoom;
@@ -27,6 +33,20 @@ namespace StarTravel
             }
         }
 
+        /// <summary>
+        /// Конструктор для экземпляра класса
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="dir"></param>
+        /// <param name="size"></param>
+        /// <param name="closely"></param>
+        /// <param name="delay"></param>
+        /// <param name="image"></param>
+        /// <param name="focusPoint"></param>
+        /// <param name="kindOfCollisionObject"></param>
+        /// <param name="drawingPriority"></param>
+        /// <param name="maxSize"></param>
+        /// <param name="text"></param>
         public FirstAidKit(Point pos, Point dir, Size size, int closely, int delay, Image image,
             Point focusPoint, KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.HealingSpaceObject,
             int drawingPriority = 5, Size? maxSize = null, string text = "") : base(pos, dir, size, closely, delay, image,
@@ -35,6 +55,9 @@ namespace StarTravel
             Text = string.Empty;
         }
 
+        /// <summary>
+        /// Переопределённый метод обновления данных объекта
+        /// </summary>
         public override void Update()
         {
             if (IsBoom)
@@ -49,6 +72,9 @@ namespace StarTravel
             }
         }
 
+        /// <summary>
+        /// Переопределённый метод отрисовки объекта на форме
+        /// </summary>
         public override void Draw()
         {
             if(Boom != null) { Boom = null; }
@@ -57,6 +83,12 @@ namespace StarTravel
             Game.Buffer.Graphics.DrawEllipse(pen, Rect);
         }
 
+        /// <summary>
+        /// Генерирует новую случайную позицию объекта 
+        /// </summary>
+        /// <param name="seedForRandom">Семено для класса Random, чтобы избежать слипания объектов, 
+        /// которые генерируют новую позицию практически одновременно</param>
+        /// <param name="delay">Задержка отрисовки объекта на определённое количество попыток его отрисовки</param>
         public override void NewStartPosition(int seedForRandom = 0, int delay = 0)
         {
             base.NewStartPosition();

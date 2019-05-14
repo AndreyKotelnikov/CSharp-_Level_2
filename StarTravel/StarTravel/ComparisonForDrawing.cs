@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace StarTravel
 {
+    /// <summary>
+    /// Класс, который реализует метод для сравнения объектов отрисовки при сортировке
+    /// </summary>
     class ComparisonForDrawing : IComparer<IDraw>
     {
+        /// <summary>
+        /// Метод для сравнения объектов отрисовки
+        /// </summary>
+        /// <param name="x">Первый объект для сравнения</param>
+        /// <param name="y">Второй объект для сравнения</param>
+        /// <returns>Возвращает результат сравнения: положительное или отрицательное число или ноль</returns>
         public int Compare(IDraw x, IDraw y)
         {
             if (x.DrawingPriority < y.DrawingPriority) { return 1; }

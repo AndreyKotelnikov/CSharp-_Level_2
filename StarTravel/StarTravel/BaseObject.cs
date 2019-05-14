@@ -14,6 +14,10 @@ namespace StarTravel
     /// </summary>
     abstract class BaseObject: ICollision, ISpaceMove, IDraw, IUpdate, IBoom, ILog
     {
+        /// <summary>
+        /// Семено для класса Random, чтобы избежать слипания объектов, 
+        /// которые генерируют новую позицию практически одновременно
+        /// </summary>
         protected static int seedForRandom = 0;
         /// <summary>
         /// ID объекта
@@ -28,19 +32,25 @@ namespace StarTravel
         /// Текущий размер объекта
         /// </summary>
         private Size size;
-
+        /// <summary>
+        /// Объект взорвался?
+        /// </summary>
         protected bool isBoom;
 
         /// <summary>
         /// ID объекта
         /// </summary>
         internal int ID { get; private set; }
-
+        /// <summary>
+        /// Указывает вид объекта из перечисления 
+        /// </summary>
         public KindOfCollisionObject KindOfCollisionObject { get; private set; }
-
+        /// <summary>
+        /// Приоритет для отрисовки: 0 - отрисовывается последним, 1 - предпоследним и т.д.
+        /// </summary>
         public int DrawingPriority { get; private set; }
         /// <summary>
-        /// Объект взрывается сейчас?
+        /// Объект взорвался?
         /// </summary>
         public virtual bool IsBoom
         {
@@ -115,14 +125,31 @@ namespace StarTravel
         /// Площадь объекта на форме
         /// </summary>
         public virtual Rectangle Rect { get { return new Rectangle(new Point(Pos.X - Size.Width/2, Pos.Y - Size.Height/2), Size); } }
-
+        /// <summary>
+        /// Событие, которое активируется для действий, подлежащих логированию
+        /// </summary>
         public event EventHandler<LogEventArgs> Logging;
-
+        /// <summary>
+        /// Статический конструктор для статических членов класса
+        /// </summary>
         static BaseObject()
         {
             countID = 0;
         }
-
+        /// <summary>
+        /// Конструктор экземпляра класса
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="dir"></param>
+        /// <param name="size"></param>
+        /// <param name="closely"></param>
+        /// <param name="drawingPriority"></param>
+        /// <param name="kindOfCollisionObject"></param>
+        /// <param name="image"></param>
+        /// <param name="focusPoint"></param>
+        /// <param name="delay"></param>
+        /// <param name="maxSize"></param>
+        /// <param name="text"></param>
         public BaseObject(Point pos, Point dir, Size size, int closely, int drawingPriority, 
             KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.NoDamageSpaceObject, Image image = null, 
             Point? focusPoint = null, int delay = 0, Size? maxSize = null, string text = "")
@@ -143,6 +170,9 @@ namespace StarTravel
             IsBoom = false;
             
         }
+        /// <summary>
+        /// Отрисовывает объект на форме
+        /// </summary>
         public virtual void Draw()
         {
             if (KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject && Closely == 0)
@@ -158,10 +188,16 @@ namespace StarTravel
                 Game.Buffer.Graphics.DrawString(Text, font, myBrush, Pos.X - Size.Width/2, Pos.Y - Size.Height/2 + (int)(Size.Height * (1 - offSet)));
             }
         }
-        
+        /// <summary>
+        /// Абстрактный метод для обновления данных объекта
+        /// </summary>
         public abstract void Update();
-        
 
+        /// <summary>
+        /// Проверяет, есть ли столкновение текущего объекта с остальными
+        /// </summary>
+        /// <param name="o">Массив объектов для проверки столкновения с ними</param>
+        /// <returns>Возвращает true, если есть столкновение. Иначе false.</returns>
         public virtual bool Collision(IDraw[] o)
         {
             foreach (var item in o)
@@ -186,14 +222,26 @@ namespace StarTravel
         //    return 0;
         //}
 
+        /// <summary>
+        /// Взрывает текущий объект и создаёт объект, который отображает взрыв
+        /// </summary>
+        /// <param name="images">Массив картинок для отображения взрыва</param>
+        /// <param name="repeatEveryImage">Количество повторений отрисовки каждой картинки взрыва</param>
         public void CreatBoom(Image[] images, int repeatEveryImage = 2)
         {
             IsBoom = true;
             Boom = new Boom(Pos, Dir, Size, Closely, images, FocusPoint, repeatEveryImage, DrawingPriority);
         }
 
+        /// <summary>
+        /// Генерирует новую случайную позицию объекта 
+        /// </summary>
+        /// <param name="seedForRandom">Семено для класса Random, чтобы избежать слипания объектов, 
+        /// которые генерируют новую позицию практически одновременно</param>
+        /// <param name="delay">Задержка отрисовки объекта на определённое количество попыток его отрисовки</param>
         public virtual void NewStartPosition(int seedForRandom = 0, int delay = 0)
         {
+            //Проверяем, врезался ли объект в корабль
             if (KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject && Closely == 0 && IsBoom == false)
             {
                 Random rand = new Random();
@@ -202,17 +250,25 @@ namespace StarTravel
                 Logging?.Invoke(this, logEvent);
                 Game.Ship.EnergyLow(damage);
                 System.Media.SystemSounds.Asterisk.Play();
-                
             }
             IsBoom = false;
             Boom = null;
         }
 
+        /// <summary>
+        /// Обработчик события об изменении количества убитых астероидов
+        /// </summary>
+        /// <param name="killAsteroids"></param>
         public virtual void Game_KillAsteroid(int killAsteroids)
         {
             Text = $"Ты убил {killAsteroids} {Helper.InflectionOfWord(killAsteroids, "астероид", "астероида", "астероидов")}";
         }
 
+        /// <summary>
+        /// Метод для запуска события о логировании из наследуемых классов
+        /// </summary>
+        /// <param name="o">Отправитель данных для логирования</param>
+        /// <param name="logEvent">Объект с данными о логируемом событии</param>
         protected void StartLogginEvent(Object o, LogEventArgs logEvent)
         {
             Logging?.Invoke(0, logEvent);

@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace StarTravel
 {
+    /// <summary>
+    /// Перечисление видов сталкиваемых объектов
+    /// </summary>
     public enum KindOfCollisionObject
     {
-        Weapon, DamageSpaceObject, NoDamageSpaceObject, Ship, HealingSpaceObject
+        Weapon,  //Оружие
+        DamageSpaceObject, //Может наносить урон
+        NoDamageSpaceObject, //Не может наносить урон
+        Ship, //Корабль
+        HealingSpaceObject //Может увеличивать запас энергии
     }
 }

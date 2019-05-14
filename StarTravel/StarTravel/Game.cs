@@ -13,29 +13,77 @@ namespace StarTravel
     /// </summary>
     static class Game
     {
+        /// <summary>
+        /// Таймер, определяет частоту отрисовки и изменения данных в игре
+        /// </summary>
         private static Timer timer = new Timer { Interval = 30 };
+        /// <summary>
+        ///  Контекст, необходимый для создания буфера графики
+        /// </summary>
         private static BufferedGraphicsContext _context;
+        /// <summary>
+        /// Буфер графики, где сначала отрисовываются все нужные объекты и потом выводяся на форму
+        /// </summary>
         public static BufferedGraphics Buffer { get; private set; }
-        // Свойства
-        // Ширина и высота игрового поля
+        /// <summary>
+        /// Ширина игрового поля
+        /// </summary>
         public static int Width { get; private set; }
+        /// <summary>
+        /// Высота игрового поля
+        /// </summary>
         public static int Height { get; private set; }
+        /// <summary>
+        /// Координаты центра игрового поля
+        /// </summary>
         public static Point ScreenCenterPoint { get; private set; }
+        /// <summary>
+        /// Ссылка на объект Корабль для доступа из других классов
+        /// </summary>
         public static Ship Ship { get; private set; }
+        /// <summary>
+        /// Массив объектов для отрисовки на форме
+        /// </summary>
         private static IDraw[] objsForGame;
+        /// <summary>
+        /// Массив картинок, которые используются для отображения космических объектов
+        /// </summary>
         private static Image[] imageList;
+        /// <summary>
+        /// Массив картинок, которые иммитируют динамическое отображение взрыва при последовательном показе
+        /// </summary>
         private static Image[] imageBoomList;
+        /// <summary>
+        /// Картинка для отображения на заднем фоне
+        /// </summary>
         private static Image imageBackGround;
+        /// <summary>
+        /// Картинка для отображения кабины корабля
+        /// </summary>
         private static Image imageShip;
+        /// <summary>
+        /// Ссылка на форму для вывода дополнительных сообщений в отдельных диалоговых окнах
+        /// </summary>
         private static Form form;
+        /// <summary>
+        /// Количество убитых астероидов
+        /// </summary>
         private static int killAsteroids;
+        /// <summary>
+        /// Ссылка на класс, который выполняет логирование
+        /// </summary>
         private static Logger logger;
+        /// <summary>
+        /// Ссылка на класс, который реализует метод для сравнения объектов отрисовки при сортировке
+        /// </summary>
         private static ComparisonForDrawing comparisonForDrawing;
-
+        /// <summary>
+        /// Событие, которое активируется при изменении количества убитых астероидов
+        /// </summary>
         public static event Action<int> KillAsteroid;
 
         /// <summary>
-        /// Создаёт основные объекты игры
+        /// Создаёт основные объекты игры и делает необходимые подписки на события
         /// </summary>
         public static void Load()
         {
@@ -112,16 +160,14 @@ namespace StarTravel
             objsForGame[objsForGame.Length - 4] = logger;
             objsForGame[objsForGame.Length - 5] = logger;
 
-            //baseObjs[i] = new BaseObject(startPoint, new Point(-92, -1), new Size(1, 1), 0);
-
-            //for (int i = 0; i < _objs.Length; i++)
-            //    _objs[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20), i.ToString());
-            //for (int i = _objs.Length / 2; i < _objs.Length; i++)
-            //    _objs[i] = new Star(new Point(600, (i - (_objs.Length / 2)) * 20), new Point(i, 0), new Size(20, 20), i.ToString());
-
             comparisonForDrawing = new ComparisonForDrawing();
         }
 
+        /// <summary>
+        /// Метод запускается при смерти корабля
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="message"></param>
         private static void Ship_MessageDie(object obj, string message)
         {
             // !!! Выходит ошибка - this равно null - пока не знаю почему.
@@ -159,7 +205,7 @@ namespace StarTravel
         /// <summary>
         /// Производит инициализацию начальных настроек игры и загрузку картинок
         /// </summary>
-        /// <param name="form">Ссылка на форму нужна для вывода сообщений об исключительных ситуациях</param>
+        /// <param name="form">Ссылка на форму нужна для вывода сообщений об исключительных ситуациях и диалогов</param>
         public static void Init(Form form)
         {
             Game.form = form;
@@ -177,14 +223,14 @@ namespace StarTravel
             }
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
-            
+            //Прячем курсор мыши
             Cursor.Hide();
-
+            //Расчитываем координаты центра игрового поля
             ScreenCenterPoint = new Point(Width / 2, Height / 2);
             
             // Связываем буфер в памяти с графическим объектом, чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
-
+            //Загружаем картинки
             imageList = new Image[12];
             imageList[0] = Image.FromFile(@"..\..\Звезда1.png");
             imageList[1] = Image.FromFile(@"..\..\Звезда2.png");
@@ -205,9 +251,9 @@ namespace StarTravel
             {
                 imageBoomList[i] = Image.FromFile($"..\\..\\Взрыв{i+1}.png");
             }
-
+            //Запускаем создание объектов игры
             Load();
-            
+            //Запускаем таймер и делаем подписку на событие
             timer.Start();
             timer.Tick += Timer_Tick;
         }
@@ -217,18 +263,13 @@ namespace StarTravel
         /// </summary>
         public static void Draw()
         {
-            // Проверяем вывод графики
-            //Buffer.Graphics.Clear(Color.Black);
-            //Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(100, 100, 200, 200));
-            //Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(100, 100, 200, 200));
-            //Buffer.Render();
-
             Buffer.Graphics.Clear(Color.Black);
             Buffer.Graphics.DrawImage(imageBackGround, new Rectangle(0, 0, Width, Height));
             Array.Sort(objsForGame, comparisonForDrawing.Compare);
             foreach (IDraw obj in objsForGame)
+            {
                 obj.Draw();
-                        
+            }
             Buffer.Render();
         }
 
@@ -244,8 +285,10 @@ namespace StarTravel
                     if (obj is IUpdate)
                     {
                         (obj as IUpdate).Update();
+                        //Проверяем: может ли объект сталкиваться и взрываться.
                         if (obj is ICollision && (!(obj is IBoom) || (obj as IBoom)?.IsBoom == false))
                         {
+                            //Проверяем разрушаемые объекты на столкновение с оружием
                             if ((obj as ICollision).KindOfCollisionObject == KindOfCollisionObject.DamageSpaceObject)
                             {
                                 if ((obj as ICollision).Collision(objsForGame))
@@ -256,6 +299,7 @@ namespace StarTravel
                                     (obj as IBoom)?.CreatBoom(imageBoomList, 2);
                                 }
                             }
+                            //Проверяем лечащие объекты на столкновение с оружием
                             else if ((obj as ICollision).KindOfCollisionObject == KindOfCollisionObject.HealingSpaceObject)
                             {
                                 if ((obj as ICollision).Collision(objsForGame))

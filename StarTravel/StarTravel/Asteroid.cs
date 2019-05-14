@@ -9,6 +9,20 @@ namespace StarTravel
 {
     class Asteroid : BaseObject
     {
+        /// <summary>
+        /// Конструктор экземпляра класса
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="dir"></param>
+        /// <param name="size"></param>
+        /// <param name="closely"></param>
+        /// <param name="delay"></param>
+        /// <param name="image"></param>
+        /// <param name="focusPoint"></param>
+        /// <param name="kindOfCollisionObject"></param>
+        /// <param name="drawingPriority"></param>
+        /// <param name="maxSize"></param>
+        /// <param name="text"></param>
         public Asteroid(Point pos, Point dir, Size size, int closely, int delay, Image image, 
             Point focusPoint, KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.DamageSpaceObject, 
             int drawingPriority = 5, Size? maxSize = null, string text = "")
@@ -18,7 +32,9 @@ namespace StarTravel
             Boom = null;
             Text = Closely == 0 ? "Летит в корабль" : "";
         }
-        
+        /// <summary>
+        /// Переопределённый метод обновления данных объекта
+        /// </summary>
         public override void Update()
         {
             if (IsBoom)
@@ -36,7 +52,9 @@ namespace StarTravel
                 SpaceEngine.Update(this);
             }
         }
-
+        /// <summary>
+        /// Переопределённый метод отрисовки объекта на форме
+        /// </summary>
         public override void Draw()
         {
             if (Boom != null) { Boom.Draw(); }
@@ -47,7 +65,12 @@ namespace StarTravel
                 base.Draw();
             }
         }
-
+        /// <summary>
+        /// Генерирует новую случайную позицию объекта 
+        /// </summary>
+        /// <param name="seedForRandom">Семено для класса Random, чтобы избежать слипания объектов, 
+        /// которые генерируют новую позицию практически одновременно</param>
+        /// <param name="delay">Задержка отрисовки объекта на определённое количество попыток его отрисовки</param>
         public override void NewStartPosition(int seedForRandom = 0, int delay = 0)
         {
             base.NewStartPosition();

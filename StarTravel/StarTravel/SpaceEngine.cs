@@ -9,17 +9,51 @@ namespace StarTravel
 {
     static class SpaceEngine
     {
+        /// <summary>
+        /// Общий коэффициент повышения скорости движения объекта
+        /// </summary>
         static int speedUp;
+        /// <summary>
+        /// Коэффициент повышения скорости движения объекта по оси X
+        /// </summary>
         static int XSpeedUp;
+        /// <summary>
+        /// Коэффициент повышения скорости движения объекта по оси Y
+        /// </summary>
         static int YSpeedUp;
+        /// <summary>
+        /// Максимальная величина смещения между смещением по оси X и оси Y
+        /// </summary>
         static int maxDir;
+        /// <summary>
+        /// Смещение координат по оси X
+        /// </summary>
         static int offsetX;
+        /// <summary>
+        /// Смещение координат по оси Y
+        /// </summary>
         static int offsetY;
+        /// <summary>
+        /// Новая рассчётная ширина объекта
+        /// </summary>
         static int width;
+        /// <summary>
+        /// Новая рассчётная высота объекта
+        /// </summary>
         static int height;
+        /// <summary>
+        /// Точка, из которой (или в которую) движется объект
+        /// </summary>
         static Point focusPoint;
+        /// <summary>
+        /// Семено для класса Random, чтобы избежать слипания объектов, 
+        /// которые генерируют новую позицию практически одновременно
+        /// </summary>
         static int seedForRandom;
-
+        /// <summary>
+        /// Обновляет позицию и размер объекта
+        /// </summary>
+        /// <param name="sObj">Объект, данные которого нужно обновить</param>
         internal static void Update(ISpaceMove sObj)
         {
             focusPoint = sObj.FocusPoint;
@@ -54,42 +88,55 @@ namespace StarTravel
         //        bObj.Pos.Y < 0 ? (int)(-bObj.Size.Height * 0.1) : (bObj.Pos.Y - bObj.Size.Height * speedUp / 50 - Game.Height / (Game.Height - bObj.Pos.Y)));
         //}
 
-        private static void DefineSpeedUpAsteroid(ISpaceMove bObj)
+        /// <summary>
+        /// Определяет общий коэффициент повышения скорости движения для объекта
+        /// </summary>
+        /// <param name="sObj">Объект, данные которого нужно обновить</param>
+        private static void DefineSpeedUpAsteroid(ISpaceMove sObj)
         {
-            XSpeedUp = (int)(Math.Abs((bObj.Dir.X > 0) ? ((double)bObj.Pos.X / (Game.Width - focusPoint.X)) : ((double)(focusPoint.X - bObj.Pos.X) / focusPoint.X)) * 10);
-            YSpeedUp = (int)(Math.Abs((bObj.Dir.Y > 0) ? ((double)bObj.Pos.Y / (Game.Height - focusPoint.Y)) : ((double)(focusPoint.Y - bObj.Pos.Y) / focusPoint.Y)) * 10);
+            XSpeedUp = (int)(Math.Abs((sObj.Dir.X > 0) ? ((double)sObj.Pos.X / (Game.Width - focusPoint.X)) : ((double)(focusPoint.X - sObj.Pos.X) / focusPoint.X)) * 10);
+            YSpeedUp = (int)(Math.Abs((sObj.Dir.Y > 0) ? ((double)sObj.Pos.Y / (Game.Height - focusPoint.Y)) : ((double)(focusPoint.Y - sObj.Pos.Y) / focusPoint.Y)) * 10);
 
             speedUp = XSpeedUp > YSpeedUp ? XSpeedUp : YSpeedUp;
             if (speedUp == 0) { speedUp = 1; }
         }
-
-        private static void CheckingOutOfScreen(ISpaceMove bObj)
+        /// <summary>
+        /// Проверяет выход объекта за рамки экрана и, в случае выхода, генерирует новую позицию объекта
+        /// </summary>
+        /// <param name="sObj">Объект, который нужно проверить</param>
+        private static void CheckingOutOfScreen(ISpaceMove sObj)
         {
-            if (bObj.Pos.X + width < 0 || bObj.Pos.X - width > Game.Width || bObj.Pos.Y + height < 0 || bObj.Pos.Y - height > Game.Height)
+            if (sObj.Pos.X + width < 0 || sObj.Pos.X - width > Game.Width || sObj.Pos.Y + height < 0 || sObj.Pos.Y - height > Game.Height)
             {
                seedForRandom++;
-               bObj.NewStartPosition(seedForRandom, 0);
+               sObj.NewStartPosition(seedForRandom, 0);
             }
         }
-
-        private static void UpdateSize(ISpaceMove bObj)
+        /// <summary>
+        /// Обновляет размер объекта
+        /// </summary>
+        /// <param name="sObj">Объект, данные которого нужно обновить</param>
+        private static void UpdateSize(ISpaceMove sObj)
         {
-            width = (int)(bObj.MaxSize.Width * ((double)Math.Abs(focusPoint.X - bObj.Pos.X)) / focusPoint.X  * (11 - bObj.Closely));
+            width = (int)(sObj.MaxSize.Width * ((double)Math.Abs(focusPoint.X - sObj.Pos.X)) / focusPoint.X  * (11 - sObj.Closely));
             if (width == 0) { width = 1; }
-            height = (int)(bObj.MaxSize.Height * ((double)Math.Abs(focusPoint.Y - bObj.Pos.Y)) / focusPoint.Y  * (11 - bObj.Closely));
+            height = (int)(sObj.MaxSize.Height * ((double)Math.Abs(focusPoint.Y - sObj.Pos.Y)) / focusPoint.Y  * (11 - sObj.Closely));
             if (height == 0) { height = 1; }
-            if (width >= height) { bObj.Size = new Size(width, width); }
-            else { bObj.Size = new Size(height, height); }
+            if (width >= height) { sObj.Size = new Size(width, width); }
+            else { sObj.Size = new Size(height, height); }
         }
-
-        private static void UpdateSizeAsteroid(ISpaceMove bObj)
+        /// <summary>
+        /// Обновляет размер объекта
+        /// </summary>
+        /// <param name="sObj">Объект, данные которого нужно обновить</param>
+        private static void UpdateSizeAsteroid(ISpaceMove sObj)
         {
-            width = (int)(bObj.MaxSize.Width * (Math.Abs((bObj.Dir.X > 0) ? ((double)bObj.Pos.X / (Game.Width - focusPoint.X)) : ((double)(focusPoint.X - bObj.Pos.X) / focusPoint.X))  * (11 - bObj.Closely)));
+            width = (int)(sObj.MaxSize.Width * (Math.Abs((sObj.Dir.X > 0) ? ((double)sObj.Pos.X / (Game.Width - focusPoint.X)) : ((double)(focusPoint.X - sObj.Pos.X) / focusPoint.X))  * (11 - sObj.Closely)));
             if (width == 0) { width = 1; }
-            height = (int)(bObj.MaxSize.Height * (Math.Abs((bObj.Dir.Y > 0) ? ((double)bObj.Pos.Y / (Game.Height - focusPoint.Y)) : ((double)(focusPoint.Y - bObj.Pos.Y) / focusPoint.Y)) * (11 - bObj.Closely)));
+            height = (int)(sObj.MaxSize.Height * (Math.Abs((sObj.Dir.Y > 0) ? ((double)sObj.Pos.Y / (Game.Height - focusPoint.Y)) : ((double)(focusPoint.Y - sObj.Pos.Y) / focusPoint.Y)) * (11 - sObj.Closely)));
             if (height == 0) { height = 1; }
-            if (width >= height) { bObj.Size = new Size(width, width); }
-            else { bObj.Size = new Size(height, height); }
+            if (width >= height) { sObj.Size = new Size(width, width); }
+            else { sObj.Size = new Size(height, height); }
         }
 
         //private static void UpdateSizeAsteroidForCollision(BaseObject bObj)
@@ -102,21 +149,31 @@ namespace StarTravel
         //    else { bObj.Size = new Size(height, height); }
         //}
 
-        private static void UpdatePosition(ISpaceMove bObj)
+        /// <summary>
+        /// Обновляет позицию объекта
+        /// </summary>
+        /// <param name="sObj">Объект, данные которого нужно обновить</param>
+        private static void UpdatePosition(ISpaceMove sObj)
         {
-            maxDir = Math.Abs(bObj.Dir.X) >= Math.Abs(bObj.Dir.Y) ? Math.Abs(bObj.Dir.X) : Math.Abs(bObj.Dir.Y);
+            maxDir = Math.Abs(sObj.Dir.X) >= Math.Abs(sObj.Dir.Y) ? Math.Abs(sObj.Dir.X) : Math.Abs(sObj.Dir.Y);
             if (maxDir == 0) { maxDir = 1; }
-            offsetX = bObj.Dir.X * speedUp / maxDir;
-            if (offsetX == 0) { offsetX = bObj.Dir.X / Math.Abs(bObj.Dir.X); }
-            offsetY = bObj.Dir.Y * speedUp / maxDir;
-            if (offsetY == 0) { offsetY = bObj.Dir.Y / Math.Abs(bObj.Dir.Y); }
-            bObj.Pos = new Point(bObj.Pos.X + offsetX, bObj.Pos.Y + offsetY);
+            offsetX = sObj.Dir.X * speedUp / maxDir;
+            //offsetX = sObj.Dir.X * XSpeedUp / maxDir;
+            if (offsetX == 0) { offsetX = sObj.Dir.X / Math.Abs(sObj.Dir.X); }
+            offsetY = sObj.Dir.Y * speedUp / maxDir;
+            //offsetY = sObj.Dir.Y * YSpeedUp / maxDir;
+            if (offsetY == 0) { offsetY = sObj.Dir.Y / Math.Abs(sObj.Dir.Y); }
+            sObj.Pos = new Point(sObj.Pos.X + offsetX, sObj.Pos.Y + offsetY);
         }
 
-        private static void DefineSpeedUp(ISpaceMove bObj)
+        /// <summary>
+        /// Определяет общий коэффициент повышения скорости движения для объекта
+        /// </summary>
+        /// <param name="sObj">Объект, данные которого нужно обновить</param>
+        private static void DefineSpeedUp(ISpaceMove sObj)
         {
-            XSpeedUp = (int)(((double)Math.Abs(focusPoint.X - bObj.Pos.X)) / focusPoint.X * 10);
-            YSpeedUp = (int)(((double)Math.Abs(focusPoint.Y - bObj.Pos.Y)) / focusPoint.Y * 10);
+            XSpeedUp = (int)(((double)Math.Abs(focusPoint.X - sObj.Pos.X)) / focusPoint.X * 10);
+            YSpeedUp = (int)(((double)Math.Abs(focusPoint.Y - sObj.Pos.Y)) / focusPoint.Y * 10);
 
             speedUp = XSpeedUp > YSpeedUp ? XSpeedUp : YSpeedUp;
             if (speedUp == 0) { speedUp = 1; }

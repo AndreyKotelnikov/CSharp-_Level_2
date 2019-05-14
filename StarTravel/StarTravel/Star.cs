@@ -10,6 +10,20 @@ namespace StarTravel
 {
     class Star:BaseObject
     {
+        /// <summary>
+        /// Конструктор экземпляра класса
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="dir"></param>
+        /// <param name="size"></param>
+        /// <param name="closely"></param>
+        /// <param name="delay"></param>
+        /// <param name="image"></param>
+        /// <param name="kindOfCollisionObject"></param>
+        /// <param name="drawingPriority"></param>
+        /// <param name="focusPoint"></param>
+        /// <param name="maxSize"></param>
+        /// <param name="text"></param>
         public Star(Point pos, Point dir, Size size, int closely, int delay, Image image, 
             KindOfCollisionObject kindOfCollisionObject = KindOfCollisionObject.NoDamageSpaceObject, int drawingPriority = 10, Point? focusPoint = null, Size? maxSize = null, string text = "") 
             : base(pos, dir, size, closely, drawingPriority, kindOfCollisionObject, image, focusPoint, delay, maxSize, text)
@@ -17,6 +31,9 @@ namespace StarTravel
             
         }
 
+        /// <summary>
+        /// Переопределённый метод отрисовки объекта на форме
+        /// </summary>
         public override void Draw()
         {
             //Game.Buffer.Graphics.DrawLine(Pens.White, pos.X, pos.Y, pos.X + size.Width, pos.Y + size.Height);
@@ -37,13 +54,21 @@ namespace StarTravel
             //    Game.Buffer.Graphics.FillPath(brush, path);
             //}
         }
-
+        /// <summary>
+        /// Переопределённый метод обновления данных объекта
+        /// </summary>
         public override void Update()
         {
             if (Delay != 0) { Delay--; return; }
             SpaceEngine.Update(this);
         }
 
+        /// <summary>
+        /// Генерирует новую случайную позицию объекта 
+        /// </summary>
+        /// <param name="seedForRandom">Семено для класса Random, чтобы избежать слипания объектов, 
+        /// которые генерируют новую позицию практически одновременно</param>
+        /// <param name="delay">Задержка отрисовки объекта на определённое количество попыток его отрисовки</param>
         public override void NewStartPosition(int seedForRandom = 0, int delay = 0)
         {
             Pos = Game.ScreenCenterPoint;
