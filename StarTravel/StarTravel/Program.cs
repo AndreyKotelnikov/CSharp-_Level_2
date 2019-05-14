@@ -7,6 +7,9 @@ using System.Windows.Forms;
 namespace StarTravel
 {
     
+    //Выполнил Андрей Котельников
+    //ГБ Курс C# Уровень 2
+
     class Program
     {
         /// <summary>
