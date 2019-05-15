@@ -24,7 +24,7 @@ namespace StarTravel
                 if (isBoom == false && value == true)
                 {
                     Random rand = new Random();
-                    int cure = rand.Next(MaxSize.Width, MaxSize.Width * 2);
+                    int cure = rand.Next(10 - MaxSize.Width > 0 ? 10 - MaxSize.Width : 1, (15 - MaxSize.Width > 0 ? 15 - MaxSize.Width : 1) * 2);
                     Game.Ship.EnergyUp(cure);
                     LogEventArgs e = new LogEventArgs(this, null, GetType().GetProperty("IsBoom"), Game.Ship, cure, "вылечила жизни на");
                     StartLogginEvent(this, e);

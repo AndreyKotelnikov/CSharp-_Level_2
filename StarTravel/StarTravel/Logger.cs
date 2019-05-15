@@ -73,7 +73,10 @@ namespace StarTravel
             int x = Game.Width - 300;
             int y = Game.Height - 100;
 
-            Game.Buffer.Graphics.FillRectangle(Brushes.White, x, y, 280, 90);
+            if (logList.Count > 0)
+            {
+                Game.Buffer.Graphics.FillRectangle(Brushes.White, x, y, 280, 90);
+            }
 
             LogEventArgs[] arr = logList.ToArray();
             Array.Reverse(arr);
