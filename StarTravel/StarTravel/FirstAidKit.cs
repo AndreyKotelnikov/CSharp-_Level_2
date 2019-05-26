@@ -99,5 +99,10 @@ namespace StarTravel
             MaxSize = new Size(size, size);
             if(Closely == 0) { Closely = rand.Next(1, 11); }
         }
+
+        public override void CreatBoom(Image[] images = null, int repeatEveryImage = 0)
+        {
+            IsBoom = true;
+        }
     }
 }

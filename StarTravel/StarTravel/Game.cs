@@ -84,24 +84,22 @@ namespace StarTravel
 
         private static List<IDraw> asteroidsGroup;
 
+        private static int capacityOfAsteroidsGroup;
+
         private static void CreateAsteroidsGroup(int length)
         {
             Random rand = new Random();
-            int x;
-            int y;
 
             for (int i = 0; i < length; i++)
             {
-                GetXY(i, 10, out x, out y);
+                GetXY(i, 10, out int x, out int y);
 
                 int XAst = x > 0 ? rand.Next(1, (int)(Width * 0.1)) : rand.Next((int)(Width * 0.9), Width);
-                int YAst = x > 0 ? rand.Next(1, (int)(Height * 0.1)) : rand.Next((int)(Height * 0.9), Height);
+                int YAst = y > 0 ? rand.Next(1, (int)(Height * 0.1)) : rand.Next((int)(Height * 0.9), Height);
 
-                
-                asteroidsGroup.Add(new Asteroid(new Point(XAst, YAst), new Point(ScreenCenterPoint.X - XAst >= 0 ? 1 : -1,
-                ScreenCenterPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
-                rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), maxSize: new Size(20, 20)));
-                
+
+                asteroidsGroup.Add(new Asteroid(new Point(XAst, YAst), new Point(x, y), new Size(1, 1), rand.Next(10),
+                rand.Next(20, 50), imageList[((i + 2) % 4) + 7], new Point(XAst, YAst), maxSize: new Size(20, 20)));
             }
         }
 
@@ -190,6 +188,10 @@ namespace StarTravel
             form.MouseMove += (objsForGame[objsForGame.Length - 3] as FrontSight).Form_MouseMove;
             objsForGame[objsForGame.Length - 4] = logger;
             objsForGame[objsForGame.Length - 5] = logger;
+
+            asteroidsGroup = new List<IDraw>();
+            capacityOfAsteroidsGroup = 5;
+            AddNewAsteroidsGroup();
 
             comparisonForDrawing = new ComparisonForDrawing();
         }
@@ -327,6 +329,12 @@ namespace StarTravel
                                     killAsteroids++;
                                     KillAsteroid?.Invoke(killAsteroids);
                                     System.Media.SystemSounds.Hand.Play();
+                                    if (asteroidsGroup.Contains(obj))
+                                    {
+                                        objsForGame[Array.FindIndex(objsForGame, o => o == obj)] = default(IDraw);
+                                    }
+                                    asteroidsGroup.RemoveAll(o => (o as IBoom).ID == (obj as IBoom).ID);
+                                    
                                     (obj as IBoom)?.CreatBoom(imageBoomList, 2);
                                 }
                             }
@@ -336,11 +344,17 @@ namespace StarTravel
                                 if ((obj as ICollision).Collision(objsForGame))
                                 {
                                     System.Media.SystemSounds.Beep.Play();
-                                    (obj as IBoom)?.CreatBoom(imageBoomList, 2);
+                                    (obj as IBoom)?.CreatBoom(null, 0);
                                 }
                             }
                         } 
                     }
+                }
+                objsForGame = objsForGame.Where(o => o != default(IDraw)).ToArray();
+                if (asteroidsGroup.Count == 0)
+                {
+                    capacityOfAsteroidsGroup += 10;
+                    AddNewAsteroidsGroup();
                 }
             }
             catch (GameObjectException goe)
@@ -349,6 +363,13 @@ namespace StarTravel
             }
             
                 
+        }
+
+        private static void AddNewAsteroidsGroup()
+        {
+            CreateAsteroidsGroup(capacityOfAsteroidsGroup);
+            Array.Resize<IDraw>(ref objsForGame, objsForGame.Length + asteroidsGroup.Count);
+            Array.Copy(asteroidsGroup.ToArray(), 0, objsForGame, objsForGame.Length - asteroidsGroup.Count, asteroidsGroup.Count);
         }
 
         /// <summary>

@@ -40,7 +40,7 @@ namespace StarTravel
         /// <summary>
         /// ID объекта
         /// </summary>
-        internal int ID { get; private set; }
+        public int ID { get; private set; }
         /// <summary>
         /// Указывает вид объекта из перечисления 
         /// </summary>
@@ -227,7 +227,7 @@ namespace StarTravel
         /// </summary>
         /// <param name="images">Массив картинок для отображения взрыва</param>
         /// <param name="repeatEveryImage">Количество повторений отрисовки каждой картинки взрыва</param>
-        public void CreatBoom(Image[] images, int repeatEveryImage = 2)
+        public virtual void CreatBoom(Image[] images, int repeatEveryImage = 2)
         {
             IsBoom = true;
             Boom = new Boom(Pos, Dir, Size, Closely, images, FocusPoint, repeatEveryImage, DrawingPriority);

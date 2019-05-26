@@ -26,5 +26,10 @@ namespace StarTravel
         /// <param name="images">Массив картинок для отображения взрыва</param>
         /// <param name="timesOfRepeatEveryImage">Количество повторений отрисовки каждой картинки взрыва</param>
         void CreatBoom(Image[] images, int timesOfRepeatEveryImage);
+
+        /// <summary>
+        /// ID объекта
+        /// </summary>
+        int ID { get; }
     }
 }
