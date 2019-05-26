@@ -82,6 +82,57 @@ namespace StarTravel
         /// </summary>
         public static event Action<int> KillAsteroid;
 
+        private static List<IDraw> asteroidsGroup;
+
+        private static void CreateAsteroidsGroup(int length)
+        {
+            Random rand = new Random();
+            int x;
+            int y;
+
+            for (int i = 0; i < length; i++)
+            {
+                GetXY(i, 10, out x, out y);
+
+                int XAst = x > 0 ? rand.Next(1, (int)(Width * 0.1)) : rand.Next((int)(Width * 0.9), Width);
+                int YAst = x > 0 ? rand.Next(1, (int)(Height * 0.1)) : rand.Next((int)(Height * 0.9), Height);
+
+                
+                asteroidsGroup.Add(new Asteroid(new Point(XAst, YAst), new Point(ScreenCenterPoint.X - XAst >= 0 ? 1 : -1,
+                ScreenCenterPoint.Y - YAst >= 0 ? 1 : -1), new Size(1, 1), 2,
+                rand.Next(20, 50), imageList[i + 4], new Point(XAst, YAst), maxSize: new Size(20, 20)));
+                
+            }
+        }
+
+        private static void GetXY(int i, int maxNumber, out int x, out int y)
+        {
+            Random rand = new Random();
+            switch (i % 4)
+            {
+                case 0:
+                    x = -rand.Next(1, maxNumber);
+                    y = -rand.Next(1, maxNumber);
+                    break;
+                case 1:
+                    x = rand.Next(1, maxNumber);
+                    y = -rand.Next(1, maxNumber);
+                    break;
+                case 2:
+                    x = -rand.Next(1, maxNumber);
+                    y = rand.Next(1, maxNumber);
+                    break;
+                case 3:
+                    x = rand.Next(1, maxNumber);
+                    y = rand.Next(1, maxNumber);
+                    break;
+                default:
+                    x = 1;
+                    y = 1;
+                    break;
+            }
+        }
+
         /// <summary>
         /// Создаёт основные объекты игры и делает необходимые подписки на события
         /// </summary>
@@ -90,32 +141,12 @@ namespace StarTravel
             logger = new Logger();
             objsForGame = new IDraw[30];
             Random rand = new Random();
-            int x = 1;
-            int y = 1;
-            int maxNumber = 10;
+            int x;
+            int y;
             for (int i = 0; i < objsForGame.Length - 5; i++)
             {
-                switch (i % 4)
-                {
-                    case 0:
-                        x = -rand.Next(1, maxNumber);
-                        y = -rand.Next(1, maxNumber);
-                        break;
-                    case 1:
-                        x = rand.Next(1, maxNumber);
-                        y = -rand.Next(1, maxNumber);
-                        break;
-                    case 2:
-                        x = -rand.Next(1, maxNumber);
-                        y = rand.Next(1, maxNumber);
-                        break;
-                    case 3:
-                        x = rand.Next(1, maxNumber);
-                        y = rand.Next(1, maxNumber);
-                        break;
-                    default:
-                        break;
-                }
+                GetXY(i, 10, out x, out y);
+                
                 if (Math.Abs(x) <= Math.Abs(y)) { x = x / Math.Abs(x); }
                 else { y = y / Math.Abs(y); }
                 if (i <= 2)
