@@ -109,6 +109,15 @@ namespace TrainingLinq
                 Write($" {item.Key} = {item.Count},");
             }
 
+            var countItems3 = listStr.GroupBy(l => l);
+                
+
+            WriteLine("\n\nLinq 3");
+            foreach (var item in countItems3)
+            {
+                Write($" {item.Key} = {item.Count()},");
+            }
+
 
             ReadKey();
         }
