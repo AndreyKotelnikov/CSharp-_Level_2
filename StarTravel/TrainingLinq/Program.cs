@@ -118,11 +118,46 @@ namespace TrainingLinq
                 Write($" {item.Key} = {item.Count()},");
             }
 
+            WriteLine("\n\nLinq OrderBy 1");
+            Dictionary<string, int> dict = new Dictionary<string, int>()
+            {
+                {"four",4 },
+                {"two",2 },
+                { "one",1 },
+                {"three",3 },
+            };
+
+            var d = dict.OrderBy(delegate (KeyValuePair<string, int> pair) { return pair.Value; });
+            foreach (var pair in d)
+            {
+                WriteLine("{0} - {1}", pair.Key, pair.Value);
+            }
+
+            //a. Свернуть обращение к OrderBy с использованием лямбда-выражения =>.
+            WriteLine("\n\nLinq OrderByDescending 2");
+
+            d = dict.OrderByDescending(p => p.Value);
+            foreach (var pair in d)
+            {
+                WriteLine("{0} - {1}", pair.Key, pair.Value);
+            }
+
+            //b.* Развернуть обращение к OrderBy с использованием делегата
+            WriteLine("\n\nLinq OrderBy 3");
+
+            d = dict.OrderBy(GetValue);
+            foreach (var p in d)
+            {
+                WriteLine("{0} - {1}", p.Key, p.Value);
+            }
 
             ReadKey();
         }
-
-
+        
+        static private int GetValue(KeyValuePair<string, int> pair)
+        {
+            return pair.Value;
+        } 
         
     }
 }
